@@ -44,7 +44,7 @@ public class FunctionTestForStatsResponse {
         System.out.println("----------------------------------------");
 
         // When HttpClient instance is no longer needed,
-        // shut down the connection manager to ensure
+        // shut down the connection request to ensure
         // immediate deallocation of all system resources
         httpclient.getConnectionManager().shutdown();
 
