@@ -12,6 +12,8 @@
 
 package com.github.dwursteisen.imgur.request;
 
+import com.github.dwursteisen.imgur.api.ImageRequest;
+import com.github.dwursteisen.imgur.api.ImageResponse;
 import com.github.dwursteisen.imgur.api.StatsRequest;
 import com.github.dwursteisen.imgur.api.StatsResponse;
 import org.junit.Before;
@@ -19,23 +21,35 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class RequestManagerTest {
-    private RequestManager<StatsRequest, StatsResponse> manager;
+    private RequestManager<StatsRequest, StatsResponse> statsManager;
+    private RequestManager<ImageRequest, ImageResponse> imageManager;
 
 
     @Before
     public void setUp() {
-        manager = new RequestManager<StatsRequest, StatsResponse>(StatsResponse.class);
+        statsManager = new RequestManager<StatsRequest, StatsResponse>(StatsResponse.class);
+        imageManager = new RequestManager<ImageRequest, ImageResponse>(ImageResponse.class);
     }
 
     @Test
-    public void call() throws IOException {
+    public void callStats() throws IOException {
 
-        StatsResponse result = manager.call(new StatsRequest());
+        StatsResponse result = statsManager.call(new StatsRequest());
         assertNotNull(result.getBandwidthUsed());
 
+    }
+
+    @Test
+    public void callImage() throws IOException {
+        final String hash = "ABktn";
+        ImageResponse result = imageManager.call(new ImageRequest(hash));
+
+        assertNotNull(result.getImageProperty());
+        assertEquals("2010-08-31 12:10:40", result.getImageProperty().getDatetime());
     }
 }

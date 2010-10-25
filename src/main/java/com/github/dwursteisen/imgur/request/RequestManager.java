@@ -38,7 +38,7 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         final HttpClient httpclient = new DefaultHttpClient();
 
         try {
-            HttpPost httpRequest = new HttpPost(IMGUR_STATS_URL + request.getURI() + ".json");
+            HttpPost httpRequest = new HttpPost(request.createServiceUrl(IMGUR_STATS_URL) + ".json");
             httpRequest.getParams().setParameter("key", API_KEY);
 
 

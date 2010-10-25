@@ -13,5 +13,5 @@
 package com.github.dwursteisen.imgur.request;
 
 public interface Request {
-    String getURI();
+    String createServiceUrl(String baseUrl);
 }

@@ -14,20 +14,15 @@ package com.github.dwursteisen.imgur.api;
 
 import com.github.dwursteisen.imgur.request.Request;
 
-public class StatsRequest implements Request {
 
+public class ImageRequest implements Request {
+    private String hash;
 
-    private String view;
-
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
+    public ImageRequest(String hash) {
+        this.hash = hash;
     }
 
     public String createServiceUrl(String baseUrl) {
-        return baseUrl + "stats";
+        return baseUrl + "image/" + hash;
     }
 }
