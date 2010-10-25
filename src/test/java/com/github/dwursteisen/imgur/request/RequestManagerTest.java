@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 David Wursteisen
+ * Copyright (C) 2010 David Wursteisen
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -7,19 +7,27 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.github.dwursteisen.imgur.request;
 
-import com.github.dwursteisen.imgur.api.ImageRequest;
-import com.github.dwursteisen.imgur.api.ImageResponse;
-import com.github.dwursteisen.imgur.api.StatsRequest;
-import com.github.dwursteisen.imgur.api.StatsResponse;
+import com.github.dwursteisen.imgur.api.*;
+import org.apache.http.NameValuePair;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,12 +36,14 @@ import static org.junit.Assert.assertNotNull;
 public class RequestManagerTest {
     private RequestManager<StatsRequest, StatsResponse> statsManager;
     private RequestManager<ImageRequest, ImageResponse> imageManager;
+    private RequestManager<UploadRequest, UploadResponse> uploadManager;
 
 
     @Before
     public void setUp() {
         statsManager = new RequestManager<StatsRequest, StatsResponse>(StatsResponse.class);
         imageManager = new RequestManager<ImageRequest, ImageResponse>(ImageResponse.class);
+        uploadManager = new RequestManager<UploadRequest, UploadResponse>(UploadResponse.class);
     }
 
     @Test
@@ -53,6 +63,32 @@ public class RequestManagerTest {
         assertEquals("2010-08-31 12:10:40", result.getImageProperty().getDatetime());
     }
 
+    @Test
+    public void callUpload() throws IOException {
+        URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
+
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+        UploadRequest request = builder.withImageUrl(imageUrl).build();
+
+        UploadResponse response = uploadManager.call(request);
+        assertNotNull(response.getLinks());
+    }
+
+
+    @Test
+    public void buildParameters() throws MalformedURLException {
+        URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
+
+        Map<String, Object> params = new HashMap();
+        params.put("image", imageUrl);
+
+        UploadRequest request = Mockito.mock(UploadRequest.class);
+        Mockito.doReturn(params).when(request).buildParameters();
+
+        List<NameValuePair> result = uploadManager.buildParameters(request);
+
+        assertEquals(2, result.size());
+    }
 
     @Test(expected = IOException.class)
     public void callFakeImage() throws IOException {
