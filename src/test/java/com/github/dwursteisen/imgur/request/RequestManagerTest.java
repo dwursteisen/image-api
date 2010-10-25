@@ -52,4 +52,12 @@ public class RequestManagerTest {
         assertNotNull(result.getImageProperty());
         assertEquals("2010-08-31 12:10:40", result.getImageProperty().getDatetime());
     }
+
+
+    @Test(expected = IOException.class)
+    public void callFakeImage() throws IOException {
+        final String hash = "FAKE";
+        ImageResponse result = imageManager.call(new ImageRequest(hash));
+
+    }
 }

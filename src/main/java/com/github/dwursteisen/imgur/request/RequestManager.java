@@ -14,6 +14,7 @@ package com.github.dwursteisen.imgur.request;
 
 import com.google.gson.Gson;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
@@ -36,17 +37,19 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
     public RESPONSE call(REQUEST request) throws IOException {
 
         final HttpClient httpclient = new DefaultHttpClient();
+        final String serviceUrl = request.createServiceUrl(IMGUR_STATS_URL) + ".json";
 
         try {
-            HttpPost httpRequest = new HttpPost(request.createServiceUrl(IMGUR_STATS_URL) + ".json");
+            HttpPost httpRequest = new HttpPost(serviceUrl);
             httpRequest.getParams().setParameter("key", API_KEY);
-
 
             // Create a response handler
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             String responseBody = httpclient.execute(httpRequest, responseHandler);
 
             return gson.fromJson(responseBody, clazz);
+        } catch (HttpResponseException ex) {
+            throw new IOException("Oooopppss nothing found at the URL " + serviceUrl, ex);
         } finally {
             httpclient.getConnectionManager().shutdown();
         }
