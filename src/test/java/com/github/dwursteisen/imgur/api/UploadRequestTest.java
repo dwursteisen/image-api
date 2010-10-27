@@ -16,9 +16,11 @@
 
 package com.github.dwursteisen.imgur.api;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
@@ -28,14 +30,14 @@ import static org.junit.Assert.*;
 public class UploadRequestTest {
 
     @Test
-    public void build() {
+    public void build() throws IOException {
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withTitle("title").build();
         assertEquals("title", request.getTitle());
     }
 
     @Test
-    public void buildImageUrl() throws MalformedURLException {
+    public void buildImageUrl() throws IOException {
         final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
 
         UploadRequest.Builder builder = new UploadRequest.Builder();
@@ -45,8 +47,37 @@ public class UploadRequestTest {
 
     }
 
+
     @Test
-    public void buildParameters() throws MalformedURLException {
+    public void buildImageFromFile() throws IOException {
+
+        final File image = new File("./src/test/resources/uploadme.jpg");
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+
+        UploadRequest request = builder.withImageFile(image).build();
+        assertNotNull(request.getImageData());
+        assertNull(request.getImageUrl());
+
+    }
+
+
+    @Test
+    public void buildImageFromByteArray() throws IOException {
+
+        final File image = new File("./src/test/resources/uploadme.jpg");
+        byte[] array = FileUtils.readFileToByteArray(image);
+
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+
+        UploadRequest request = builder.withImageData(array).build();
+        assertNotNull(request.getImageData());
+        assertNull(request.getImageUrl());
+
+    }
+
+
+    @Test
+    public void buildParameters() throws IOException {
         final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
 
         UploadRequest.Builder builder = new UploadRequest.Builder();
@@ -58,7 +89,7 @@ public class UploadRequestTest {
     }
 
     @Test
-    public void buildParametersWithoutTitle() throws MalformedURLException {
+    public void buildParametersWithoutTitle() throws IOException {
         final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
 
         UploadRequest.Builder builder = new UploadRequest.Builder();
@@ -68,4 +99,5 @@ public class UploadRequestTest {
         assertFalse(parameters.keySet().contains("title"));
         assertEquals("http://github.com/images/modules/header/logov3-hover.png", parameters.get("image").toString());
     }
+
 }

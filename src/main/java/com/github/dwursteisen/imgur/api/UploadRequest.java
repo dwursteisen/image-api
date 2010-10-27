@@ -17,8 +17,10 @@
 package com.github.dwursteisen.imgur.api;
 
 import com.github.dwursteisen.imgur.request.Request;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,11 +36,17 @@ public class UploadRequest implements Request {
     }
 
     public Map<String, Object> buildParameters() {
-        final Map<String, Object> result = new HashMap();
-        result.put("image", imageUrl);
+        final Map<String, Object> result = new HashMap<String, Object>();
+        if (imageUrl != null) {
+            result.put("image", imageUrl);
+        } else {
+            result.put("image", imageData);
+        }
         if (title != null) {
             result.put("title", title);
         }
+
+
         return result;
     }
 
@@ -81,10 +89,14 @@ public class UploadRequest implements Request {
             return this;
         }
 
-        public UploadRequest build() {
+        public UploadRequest build() throws IOException {
             UploadRequest request = new UploadRequest();
             request.title = this.title;
             request.imageUrl = this.imageUrl;
+            request.imageData = this.imageData;
+            if (this.imageFile != null) {
+                request.imageData = FileUtils.readFileToByteArray(imageFile);
+            }
             return request;
         }
 
