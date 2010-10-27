@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="508ce9a1-4340-4a25-b705-041de3af2762" name="Default" comment="Add apache common io dependency. It's now easy to read file, and so, set it into the UploadRequest object">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imgur-api.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgur-api.ipr" afterPath="$PROJECT_DIR$/imgur-api.ipr" />
+    <list default="true" readonly="true" id="508ce9a1-4340-4a25-b705-041de3af2762" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgur-api.iml" afterPath="$PROJECT_DIR$/imgur-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgur-api.iws" afterPath="$PROJECT_DIR$/imgur-api.iws" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="imgur-api.iws" />
@@ -80,13 +76,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadRequestTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="UploadRequestTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="18" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.68896925">
+            <state line="71" column="18" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="25" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.4358047">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,9 +110,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -622,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="0" selection-start="2339" selection-end="2339" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="70" column="23" selection-start="1841" selection-end="1841" vertical-scroll-proportion="0.0">
@@ -640,10 +638,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="18" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.68896925">
+        <state line="71" column="18" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="25" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.4358047">
+          <folding />
         </state>
       </provider>
     </entry>
