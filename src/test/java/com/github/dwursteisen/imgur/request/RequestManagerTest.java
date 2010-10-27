@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -76,10 +77,26 @@ public class RequestManagerTest {
 
 
     @Test
+    public void callUploadwithImage() throws IOException {
+        final File image = new File("./src/test/resources/uploadme.jpg");
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+
+        UploadRequest request = builder.withImageFile(image).build();
+        UploadResponse response = uploadManager.call(request);
+        assertNotNull(response.getLinks());
+
+        System.err.println("...just upload an image that you will find on the url : ");
+        System.err.println("URL : " + response.getLinks().getImgur_page());
+        System.err.println("DELETE URL : " + response.getLinks().getDelete_page());
+
+
+    }
+
+    @Test
     public void buildParameters() throws MalformedURLException {
         URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
 
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put("image", imageUrl);
 
         UploadRequest request = Mockito.mock(UploadRequest.class);
@@ -93,7 +110,7 @@ public class RequestManagerTest {
     @Test(expected = IOException.class)
     public void callFakeImage() throws IOException {
         final String hash = "FAKE";
-        ImageResponse result = imageManager.call(new ImageRequest(hash));
+        imageManager.call(new ImageRequest(hash));
 
     }
 }

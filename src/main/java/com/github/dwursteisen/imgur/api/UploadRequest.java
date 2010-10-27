@@ -17,6 +17,7 @@
 package com.github.dwursteisen.imgur.api;
 
 import com.github.dwursteisen.imgur.request.Request;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -40,7 +41,7 @@ public class UploadRequest implements Request {
         if (imageUrl != null) {
             result.put("image", imageUrl);
         } else {
-            result.put("image", imageData);
+            result.put("image", new String(Base64.encodeBase64(imageData)));
         }
         if (title != null) {
             result.put("title", title);
