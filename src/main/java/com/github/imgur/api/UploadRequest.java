@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.api;
+package com.github.imgur.api;
 
-import com.github.dwursteisen.imgur.request.Request;
+import com.github.imgur.request.Request;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 

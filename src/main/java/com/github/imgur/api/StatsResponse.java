@@ -15,9 +15,9 @@
  */
 
 
-package com.github.dwursteisen.imgur.api;
+package com.github.imgur.api;
 
-import com.github.dwursteisen.imgur.request.Response;
+import com.github.imgur.request.Response;
 import com.google.gson.annotations.SerializedName;
 
 /*

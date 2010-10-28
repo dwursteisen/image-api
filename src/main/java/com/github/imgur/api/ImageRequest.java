@@ -14,28 +14,23 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.api;
+package com.github.imgur.api;
 
-import com.github.dwursteisen.imgur.request.Request;
+import com.github.imgur.request.Request;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsRequest implements Request {
 
+public class ImageRequest implements Request {
+    private String hash;
 
-    private String view;
-
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
+    public ImageRequest(String hash) {
+        this.hash = hash;
     }
 
     public String createServiceUrl(String baseUrl) {
-        return baseUrl + "stats";
+        return baseUrl + "image/" + hash;
     }
 
     public Map<String, Object> buildParameters() {

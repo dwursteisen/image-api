@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.request;
+package com.github.imgur.request;
 
 import com.google.gson.Gson;
 import org.apache.http.NameValuePair;

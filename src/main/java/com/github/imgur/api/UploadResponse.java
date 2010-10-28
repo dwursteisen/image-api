@@ -14,54 +14,73 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.api;
+package com.github.imgur.api;
 
-import com.github.dwursteisen.imgur.request.Response;
+import com.github.imgur.request.Response;
 
-
-public class ImageResponse implements Response {
+public class UploadResponse implements Response {
     /*
     {
-    "image": {
+    "upload": {
         "image": {
-            "title": null,
-            "caption": null,
-            "hash": "yPdcE",
-            "datetime": "2010-08-16 20:13:27",
-            "type": "image\/gif",
+            "name": false,
+            "title": "",
+            "caption": "",
+            "hash": "cSNjk",
+            "deletehash": "ZnKGru1reZKoabU",
+            "datetime": "2010-08-16 22:43:22",
+            "type": "image\/jpeg",
             "animated": "false",
-            "width": 314,
-            "height": 115,
-            "size": 4413,
+            "width": 720,
+            "height": 540,
+            "size": 46174,
             "views": 0,
             "bandwidth": 0
         },
         "links": {
-            "original": "http:\/\/imgur.com\/yPdcE.gif",
-            "imgur_page": "http:\/\/imgur.com\/yPdcE",
-            "small_square": "http:\/\/imgur.com\/yPdcEs.jpg",
-            "large_thumbnail": "http:\/\/imgur.com\/yPdcEl.jpg"
+            "original": "http:\/\/imgur.com\/cSNjk.jpg",
+            "imgur_page": "http:\/\/imgur.com\/cSNjk",
+            "delete_page": "http:\/\/imgur.com\/delete\/ZnKGru1reZKoabU",
+            "small_square": "http:\/\/imgur.com\/cSNjks.jpg",
+            "large_thumbnail": "http:\/\/imgur.com\/cSNjkl.jpg"
         }
     }
 }
-*/
-    static private class Image {
-        private ImageProperty image;
-        private Links links;
+     */
+
+    private Upload upload = new Upload();
+
+    public Links getLinks() {
+        return upload.links;
     }
 
-    static public class ImageProperty {
+    public Image getImage() {
+        return upload.image;
+    }
+
+    static private class Upload {
+        private Links links;
+        private Image image;
+    }
+
+    static public class Image {
+        private boolean name;
         private String title;
         private String caption;
         private String hash;
+        private String deleteHash;
         private String datetime;
         private String type;
-        private boolean animated;
+        private String animated;
         private int width;
         private int height;
         private int size;
-        private int views;
+        private int view;
         private int bandwidth;
+
+        public boolean isName() {
+            return name;
+        }
 
         public String getTitle() {
             return title;
@@ -75,6 +94,10 @@ public class ImageResponse implements Response {
             return hash;
         }
 
+        public String getDeleteHash() {
+            return deleteHash;
+        }
+
         public String getDatetime() {
             return datetime;
         }
@@ -83,7 +106,7 @@ public class ImageResponse implements Response {
             return type;
         }
 
-        public boolean isAnimated() {
+        public String getAnimated() {
             return animated;
         }
 
@@ -99,8 +122,8 @@ public class ImageResponse implements Response {
             return size;
         }
 
-        public int getViews() {
-            return views;
+        public int getView() {
+            return view;
         }
 
         public int getBandwidth() {
@@ -111,6 +134,7 @@ public class ImageResponse implements Response {
     static public class Links {
         private String original;
         private String imgur_page;
+        private String delete_page;
         private String small_square;
         private String large_thumbnail;
 
@@ -122,6 +146,10 @@ public class ImageResponse implements Response {
             return imgur_page;
         }
 
+        public String getDelete_page() {
+            return delete_page;
+        }
+
         public String getSmall_square() {
             return small_square;
         }
@@ -130,16 +158,4 @@ public class ImageResponse implements Response {
             return large_thumbnail;
         }
     }
-
-
-    private Image image = new Image();
-
-    public Links getLinks() {
-        return image.links;
-    }
-
-    public ImageProperty getImageProperty() {
-        return image.image;
-    }
-
 }

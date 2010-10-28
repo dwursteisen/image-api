@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.request;
+package com.github.imgur.request;
 
-import com.github.dwursteisen.imgur.api.*;
+import com.github.imgur.api.*;
 import org.apache.http.NameValuePair;
 import org.junit.Before;
 import org.junit.Test;

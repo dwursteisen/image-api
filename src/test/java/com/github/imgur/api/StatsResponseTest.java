@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.dwursteisen.imgur.api;
+package com.github.imgur.api;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
