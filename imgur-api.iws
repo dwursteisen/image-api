@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="508ce9a1-4340-4a25-b705-041de3af2762" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/request/Request.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/request/Request.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/request/RequestManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/request/RequestManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/StatsResponseTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/imgur/api/StatsResponseTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/StatsResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/StatsResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/ImageResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/request/RequestManagerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/imgur/request/RequestManagerTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadRequest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/request/Response.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/request/Response.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/FunctionTestForStatsResponse.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/imgur/api/FunctionTestForStatsResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/api/UploadRequestTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/imgur/api/UploadRequestTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/ImageRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageRequest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/StatsRequest.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/StatsRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/github/imgur/request/RequestManagerTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/github/imgur/request/RequestManagerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imgur-api.iws" afterPath="$PROJECT_DIR$/imgur-api.iws" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java" />
     </list>
     <ignored path="imgur-api.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -126,16 +116,38 @@
       <file leaf-file-name="RequestManagerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/github/imgur/request/RequestManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="8" selection-start="3809" selection-end="3809" vertical-scroll-proportion="0.0">
+            <state line="112" column="8" selection-start="3807" selection-end="3807" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageRequest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ImageRequest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="18" selection-start="650" selection-end="650" vertical-scroll-proportion="0.057901084">
+            <state line="32" column="16" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageResponse.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="115" column="58" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.5361217">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StatsResponse.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/StatsResponse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="13" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,8 +165,10 @@
       <file leaf-file-name="UploadResponse.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="139" column="59" selection-start="3563" selection-end="3563" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -188,6 +202,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/github/dwursteisen/imgur/api/UploadRequest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/github/dwursteisen/imgur/request/RequestManagerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java" />
       </list>
     </option>
   </component>
@@ -641,7 +657,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="998" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -653,7 +669,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35418358" sideWeight="0.66287017" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35418358" sideWeight="0.66287017" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32915717" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -701,16 +717,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/src.jar!/src/java/io/DataInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="29" selection-start="1003" selection-end="1003" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/src.jar!/src/java/io/BufferedInputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="19" selection-start="6694" selection-end="6694" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/src.jar!/src/java/io/InputStream.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="9" selection-start="1503" selection-end="1503" vertical-scroll-proportion="0.0" />
@@ -767,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="688" selection-end="688" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/github/imgur/api/FunctionTestForStatsResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="13" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0">
@@ -783,15 +782,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/github/imgur/request/RequestManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="8" selection-start="3809" selection-end="3809" vertical-scroll-proportion="0.0">
+        <state line="112" column="8" selection-start="3807" selection-end="3807" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="18" selection-start="650" selection-end="650" vertical-scroll-proportion="0.057901084">
+        <state line="32" column="16" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/StatsResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="13" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/UploadResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="59" selection-start="3563" selection-end="3563" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/imgur/api/ImageResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="58" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.5361217">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

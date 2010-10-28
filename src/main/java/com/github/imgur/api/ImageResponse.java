@@ -17,6 +17,7 @@
 package com.github.imgur.api;
 
 import com.github.imgur.request.Response;
+import com.google.gson.annotations.SerializedName;
 
 
 public class ImageResponse implements Response {
@@ -110,24 +111,24 @@ public class ImageResponse implements Response {
 
     static public class Links {
         private String original;
-        private String imgur_page;
-        private String small_square;
-        private String large_thumbnail;
+        @SerializedName("imgur_page") private String imgurPage;
+        @SerializedName("small_square") private String smallSquare;
+        @SerializedName("lage_thumbnail") private String largeThumbnail;
 
         public String getOriginal() {
             return original;
         }
 
-        public String getImgur_page() {
-            return imgur_page;
+        public String getImgurPage() {
+            return imgurPage;
         }
 
-        public String getSmall_square() {
-            return small_square;
+        public String getSmallSquare() {
+            return smallSquare;
         }
 
-        public String getLarge_thumbnail() {
-            return large_thumbnail;
+        public String getLargeThumbnail() {
+            return largeThumbnail;
         }
     }
 

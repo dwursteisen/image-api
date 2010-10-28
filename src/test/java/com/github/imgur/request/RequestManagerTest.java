@@ -86,8 +86,8 @@ public class RequestManagerTest {
         assertNotNull(response.getLinks());
 
         System.err.println("...just upload an image that you will find on the url : ");
-        System.err.println("URL : " + response.getLinks().getImgur_page());
-        System.err.println("DELETE URL : " + response.getLinks().getDelete_page());
+        System.err.println("URL : " + response.getLinks().getImgurPage());
+        System.err.println("DELETE URL : " + response.getLinks().getDeletePage());
 
 
     }
