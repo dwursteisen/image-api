@@ -16,7 +16,7 @@
 
 package com.github.imgur.api;
 
-import com.github.imgur.request.Request;
+import com.github.commons.Request;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
@@ -33,7 +33,7 @@ public class UploadRequest implements Request {
     private URL imageUrl;
 
     public String createServiceUrl(String baseUrl) {
-        return baseUrl + "upload";
+        return baseUrl + "upload" + ".json";
     }
 
     public Map<String, Object> buildParameters() {

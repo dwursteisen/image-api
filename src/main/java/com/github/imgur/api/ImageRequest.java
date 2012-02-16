@@ -16,7 +16,7 @@
 
 package com.github.imgur.api;
 
-import com.github.imgur.request.Request;
+import com.github.commons.Request;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class ImageRequest implements Request {
     }
 
     public String createServiceUrl(String baseUrl) {
-        return baseUrl + "image/" + hash;
+        return baseUrl + "image/" + hash + ".json";
     }
 
     public Map<String, Object> buildParameters() {

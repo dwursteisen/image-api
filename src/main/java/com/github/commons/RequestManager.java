@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.imgur.request;
+package com.github.commons;
 
 import com.google.gson.Gson;
 import org.apache.http.NameValuePair;
@@ -23,6 +23,7 @@ import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -34,35 +35,32 @@ import java.util.Map;
 
 public class RequestManager<REQUEST extends Request, RESPONSE extends Response> {
 
-    private static final String API_KEY = "e67bb2d5ceb42e43f8f7fc38e7ca7376";
-    private static final String IMGUR_STATS_URL = "http://api.imgur.com/2/";
+    // private static final String API_KEY = "e67bb2d5ceb42e43f8f7fc38e7ca7376";
+
     private final Class<RESPONSE> clazz;
     private final Gson gson = new Gson();
+    private final ProviderRequestGenerator provider;
 
-    public RequestManager(Class<RESPONSE> clazz) {
+    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator provider) {
         this.clazz = clazz;
-
+        this.provider = provider;
     }
+    
+    
 
     public RESPONSE call(REQUEST request) throws IOException {
-
         final HttpClient httpclient = new DefaultHttpClient();
-        final String serviceUrl = request.createServiceUrl(IMGUR_STATS_URL) + ".json";
+
+        HttpRequestBase httpRequest = provider.createHttpRequest(request);
 
         try {
-            HttpPost httpRequest = new HttpPost(serviceUrl);
-            List<NameValuePair> parameters = buildParameters(request);
-            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(parameters, "UTF-8");
-
-            httpRequest.setEntity(entity);
-
+            provider.setRequestParameters(httpRequest, request);
             // Create a response handler
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             String responseBody = httpclient.execute(httpRequest, responseHandler);
-
             return gson.fromJson(responseBody, clazz);
         } catch (HttpResponseException ex) {
-            throw new IOException("Oooopppss nothing found at the URL " + serviceUrl, ex);
+            throw new IOException("Oooopppss nothing found at the URL " + httpRequest.getURI(), ex);
         } finally {
             httpclient.getConnectionManager().shutdown();
         }
@@ -70,15 +68,4 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
     }
 
 
-    List<NameValuePair> buildParameters(REQUEST request) {
-
-        final List<NameValuePair> result = new ArrayList();
-        result.add(new BasicNameValuePair("key", API_KEY));
-
-        final Map<String, Object> mapParams = request.buildParameters();
-        for (Map.Entry<String, Object> entry : mapParams.entrySet()) {
-            result.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
-        }
-        return result;
-    }
 }

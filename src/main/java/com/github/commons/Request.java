@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.imgur.request;
+package com.github.commons;
 
 import java.util.Map;
 

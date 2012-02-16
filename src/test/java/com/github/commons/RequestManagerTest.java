@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-package com.github.imgur.request;
+package com.github.commons;
 
-import com.github.imgur.api.*;
+import com.github.imgur.ImgUrRequestGenerator;
+import com.github.imgur.api.ImageRequest;
+import com.github.imgur.api.ImageResponse;
+import com.github.imgur.api.StatsRequest;
+import com.github.imgur.api.StatsResponse;
+import com.github.imgur.api.UploadRequest;
+import com.github.imgur.api.UploadResponse;
 import org.apache.http.NameValuePair;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +41,9 @@ import static org.junit.Assert.assertNotNull;
 
 
 public class RequestManagerTest {
+
+    private static final String IMGUR_STATS_URL = "http://api.imgur.com/2/";
+
     private RequestManager<StatsRequest, StatsResponse> statsManager;
     private RequestManager<ImageRequest, ImageResponse> imageManager;
     private RequestManager<UploadRequest, UploadResponse> uploadManager;
@@ -42,9 +51,9 @@ public class RequestManagerTest {
 
     @Before
     public void setUp() {
-        statsManager = new RequestManager<StatsRequest, StatsResponse>(StatsResponse.class);
-        imageManager = new RequestManager<ImageRequest, ImageResponse>(ImageResponse.class);
-        uploadManager = new RequestManager<UploadRequest, UploadResponse>(UploadResponse.class);
+        statsManager = new RequestManager<StatsRequest, StatsResponse>(StatsResponse.class, new ImgUrRequestGenerator());
+        imageManager = new RequestManager<ImageRequest, ImageResponse>(ImageResponse.class, new ImgUrRequestGenerator());
+        uploadManager = new RequestManager<UploadRequest, UploadResponse>(UploadResponse.class, new ImgUrRequestGenerator());
     }
 
     @Test
@@ -90,21 +99,6 @@ public class RequestManagerTest {
         System.err.println("DELETE URL : " + response.getLinks().getDeletePage());
 
 
-    }
-
-    @Test
-    public void buildParameters() throws MalformedURLException {
-        URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
-
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("image", imageUrl);
-
-        UploadRequest request = Mockito.mock(UploadRequest.class);
-        Mockito.doReturn(params).when(request).buildParameters();
-
-        List<NameValuePair> result = uploadManager.buildParameters(request);
-
-        assertEquals(2, result.size());
     }
 
     @Test(expected = IOException.class)
