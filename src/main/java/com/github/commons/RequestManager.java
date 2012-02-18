@@ -17,21 +17,15 @@
 package com.github.commons;
 
 import com.google.gson.Gson;
-import org.apache.http.NameValuePair;
+import com.google.gson.JsonParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class RequestManager<REQUEST extends Request, RESPONSE extends Response> {
 
@@ -45,8 +39,7 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         this.clazz = clazz;
         this.provider = provider;
     }
-    
-    
+
 
     public RESPONSE call(REQUEST request) throws IOException {
         final HttpClient httpclient = new DefaultHttpClient();
@@ -61,6 +54,8 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
             return gson.fromJson(responseBody, clazz);
         } catch (HttpResponseException ex) {
             throw new IOException("Oooopppss nothing found at the URL " + httpRequest.getURI(), ex);
+        } catch (JsonParseException ex) {
+            throw new IOException("Ooops ! Error during decoding response. You may have sent a wrong request", ex);
         } finally {
             httpclient.getConnectionManager().shutdown();
         }
