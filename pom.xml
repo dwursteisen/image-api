@@ -37,13 +37,13 @@
             <artifactId>gson</artifactId>
             <version>1.5</version>
         </dependency>
-            <!--
-        <dependency>
-            <groupId>org.scribe</groupId>
-            <artifactId>scribe</artifactId>
-            <version>1.0.5</version>
-        </dependency>
-                -->
+        <!--
+<dependency>
+    <groupId>org.scribe</groupId>
+    <artifactId>scribe</artifactId>
+    <version>1.0.5</version>
+</dependency>
+        -->
 
         <dependency>
             <groupId>junit</groupId>
@@ -82,11 +82,11 @@
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
         </dependency>
-
     </dependencies>
 
 
     <build>
+
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>

@@ -52,4 +52,9 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator {
     public void setRequestParameters(HttpRequestBase httpRequest, Request request) {
 
     }
+
+    @Override
+    public String validateResponse(String response) {
+        return response.substring(0, response.length() - 1).replace("jsonFlickrApi(", "");
+    }
 }

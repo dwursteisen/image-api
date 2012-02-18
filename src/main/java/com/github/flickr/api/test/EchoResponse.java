@@ -6,19 +6,18 @@ import com.google.gson.annotations.SerializedName;
 public class EchoResponse implements Response {
 
     /**
-     *
      * jsonFlickrApi(
-     *   {
-     *      "method": { "_content":"flickr.test.echo" },
-     *      "name":{"_content":"value"},
-     *      "api_key":{"_content":"------------------"},
-     *      "format":{"_content":"json"},
-     *      "stat":"ok"
-     *  }
-     *  )
+     * {
+     * "method": { "_content":"flickr.test.echo" },
+     * "name":{"_content":"value"},
+     * "api_key":{"_content":"------------------"},
+     * "format":{"_content":"json"},
+     * "stat":"ok"
+     * }
+     * )
      */
-    
-    static class FlickrContent {
+
+    private static class FlickrContent {
         @SerializedName("_content")
         private String content;
 
@@ -29,17 +28,17 @@ public class EchoResponse implements Response {
 
     private FlickrContent method;
     private FlickrContent name;
-    private FlickrContent stat;
+    private String stat;
 
     public String getMethod() {
         return method.getContent();
     }
-    
+
     public String getName() {
         return name.getContent();
     }
-    
+
     public String getStat() {
-        return stat.getContent();
+        return stat;
     }
 }

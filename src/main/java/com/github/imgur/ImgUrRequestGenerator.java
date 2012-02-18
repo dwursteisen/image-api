@@ -16,7 +16,7 @@ import java.util.Map;
 public class ImgUrRequestGenerator implements ProviderRequestGenerator {
     @Override
     public HttpRequestBase createHttpRequest(Request request) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
@@ -26,9 +26,9 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator {
         UrlEncodedFormEntity entity = null;
         try {
             entity = new UrlEncodedFormEntity(parameters, "UTF-8");
-            ((HttpPost)httpRequest).setEntity(entity);
+            ((HttpPost) httpRequest).setEntity(entity);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
 
@@ -46,5 +46,8 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator {
         return result;
     }
 
-
+    @Override
+    public String validateResponse(String response) {
+        return response;
+    }
 }

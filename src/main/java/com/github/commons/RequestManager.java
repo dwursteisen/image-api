@@ -29,8 +29,6 @@ import java.io.IOException;
 
 public class RequestManager<REQUEST extends Request, RESPONSE extends Response> {
 
-    // private static final String API_KEY = "e67bb2d5ceb42e43f8f7fc38e7ca7376";
-
     private final Class<RESPONSE> clazz;
     private final Gson gson = new Gson();
     private final ProviderRequestGenerator provider;
@@ -51,11 +49,14 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
             // Create a response handler
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             String responseBody = httpclient.execute(httpRequest, responseHandler);
-            return gson.fromJson(responseBody, clazz);
+            try {
+                String json = provider.validateResponse(responseBody);
+                return gson.fromJson(json, clazz);
+            } catch (JsonParseException ex) {
+                throw new IOException("Ooops ! Error during decoding response " + responseBody + ". You may have sent a wrong request", ex);
+            }
         } catch (HttpResponseException ex) {
             throw new IOException("Oooopppss nothing found at the URL " + httpRequest.getURI(), ex);
-        } catch (JsonParseException ex) {
-            throw new IOException("Ooops ! Error during decoding response. You may have sent a wrong request", ex);
         } finally {
             httpclient.getConnectionManager().shutdown();
         }
