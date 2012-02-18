@@ -28,6 +28,7 @@ public class EchoResponse implements Response {
 
     private FlickrContent method;
     private FlickrContent name;
+    private FlickrContent testParameter;
     private String stat;
 
     public String getMethod() {
@@ -36,6 +37,10 @@ public class EchoResponse implements Response {
 
     public String getName() {
         return name.getContent();
+    }
+
+    public String getTestParameter() {
+        return testParameter.getContent();
     }
 
     public String getStat() {
