@@ -1,7 +1,7 @@
 Image Api
 =========
 
-To do what ?
+What is the main purpose of this library ?
 ------------
 Image API is here to provide an easy access to image web service like imgur, flickr, etc.
 You'll be able to get data from webservice, as you'll be able to push data like your last picture, ...
@@ -29,7 +29,14 @@ the flickr status with the stat field.
 
     System.out.println(response.getStat()); // will print ok
 
+How to compile it ?
+-------------------
+Compile it with maven
 
-Got an issue ?
+    mvn install
+
+the jar will be avaible into the target directory
+
+Got an issue?
 --------------
 Just fill an [issue](https://github.com/dwursteisen/imgur-API/issues) with your use case (service used, request, response received, response expected, ...)
