@@ -1,11 +1,11 @@
 package com.github.flickr.api.test;
 
 import com.github.flickr.Flickr;
+import com.github.flickr.FlickrBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -18,11 +18,7 @@ public class EchoManagerTest {
 
     @Before
     public void setUp() throws IOException {
-        java.io.InputStream is = this.getClass().getResourceAsStream("/secret.properties");
-        Properties properties = new Properties();
-        properties.load(is);
-
-        flickr = new Flickr(properties.getProperty("flickr.apikey"));
+        flickr = new FlickrBuilder().withApiKey().build();
         echoManager = flickr.echo();
     }
 

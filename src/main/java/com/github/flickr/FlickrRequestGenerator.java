@@ -7,12 +7,16 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class FlickrRequestGenerator implements ProviderRequestGenerator {
+
+
+    private final static Logger LOG = Logger.getLogger(FlickrRequestGenerator.class);
 
     private final String flickrBaseUrl;
 
@@ -34,6 +38,7 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator {
 
         Map<String, Object> parameters = request.buildParameters();
         parameters.put("api_key", apiKey);
+        parameters.put("format", "json");
 
         List<NameValuePair> params = new LinkedList<NameValuePair>();
 
@@ -44,6 +49,10 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator {
         String paramString = URLEncodedUtils.format(params, "utf-8");
 
         url += paramString;
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Flickr url used : " + url);
+        }
         return new HttpGet(url);
     }
 
@@ -55,6 +64,10 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator {
 
     @Override
     public String validateResponse(String response) {
-        return response.substring(0, response.length() - 1).replace("jsonFlickrApi(", "");
+        String json = response.substring(0, response.length() - 1).replace("jsonFlickrApi(", "");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("JSon received from flickr : " + json);
+        }
+        return json;
     }
 }

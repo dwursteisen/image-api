@@ -29,13 +29,28 @@ the flickr status with the stat field.
 
     System.out.println(response.getStat()); // will print ok
 
+How to get it ?
+---------------
+Grap it into the [download section](http://github.com/dwursteisen/imgur-API/downloads)
+
 How to compile it ?
 -------------------
-Compile it with maven
+Create a property file into 'src/test/resources' directory named secret.properties with this bellowed content.
+This file is only used for the testing phase of packaging.
+
+    flickr.apikey = YOUR_FLICKR_API_KEY
+
+ Compile it with maven
 
     mvn install
 
-the jar will be avaible into the target directory
+the jar will be avaible into the target directory.
+
+How to *just* compile it ?
+--------------------------
+Skip tests !
+
+    mvn install -Dmaven.test.skip=true
 
 Got an issue?
 --------------
