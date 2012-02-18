@@ -17,24 +17,13 @@
 package com.github.commons;
 
 import com.github.imgur.ImgUrRequestGenerator;
-import com.github.imgur.api.ImageRequest;
-import com.github.imgur.api.ImageResponse;
-import com.github.imgur.api.StatsRequest;
-import com.github.imgur.api.StatsResponse;
-import com.github.imgur.api.UploadRequest;
-import com.github.imgur.api.UploadResponse;
-import org.apache.http.NameValuePair;
+import com.github.imgur.api.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

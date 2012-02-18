@@ -111,9 +111,12 @@ public class ImageResponse implements Response {
 
     static public class Links {
         private String original;
-        @SerializedName("imgur_page") private String imgurPage;
-        @SerializedName("small_square") private String smallSquare;
-        @SerializedName("lage_thumbnail") private String largeThumbnail;
+        @SerializedName("imgur_page")
+        private String imgurPage;
+        @SerializedName("small_square")
+        private String smallSquare;
+        @SerializedName("lage_thumbnail")
+        private String largeThumbnail;
 
         public String getOriginal() {
             return original;

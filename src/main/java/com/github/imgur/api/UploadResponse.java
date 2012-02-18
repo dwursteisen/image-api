@@ -134,10 +134,14 @@ public class UploadResponse implements Response {
 
     static public class Links {
         private String original;
-        @SerializedName("imgur_page") private String imgurPage;
-        @SerializedName("delete_page") private String deletePage;
-        @SerializedName("small_square") private String smallSquare;
-        @SerializedName("large_thumbnail") private String largeThumbnail;
+        @SerializedName("imgur_page")
+        private String imgurPage;
+        @SerializedName("delete_page")
+        private String deletePage;
+        @SerializedName("small_square")
+        private String smallSquare;
+        @SerializedName("large_thumbnail")
+        private String largeThumbnail;
 
         public String getOriginal() {
             return original;
