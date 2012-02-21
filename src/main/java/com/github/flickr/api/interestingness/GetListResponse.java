@@ -84,6 +84,16 @@ public class GetListResponse implements Response {
         public boolean isFamily() {
             return isfamily;
         }
+
+
+        public String getPhotoUrl() {
+            // http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+            StringBuilder builder = new StringBuilder("http://farm");
+            builder.append(farm)
+                    .append(".staticflickr.com/")
+                    .append(server).append("/").append(id).append("_").append(secret).append("jpg");
+            return builder.toString();
+        }
     }
 
     private Photos photos;
