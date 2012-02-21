@@ -1,6 +1,8 @@
 package com.github.flickr.api.interestingness;
 
 import com.github.commons.Response;
+import com.github.flickr.api.commons.Extras;
+import org.scribe.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,9 @@ public class GetListResponse implements Response {
         private String title;
         private boolean ispublic;
         private boolean isfamily;
+        private String url_m;
+        private int height_m;
+        private int width_m;
 
         public String getId() {
             return id;
@@ -83,6 +88,21 @@ public class GetListResponse implements Response {
 
         public boolean isFamily() {
             return isfamily;
+        }
+
+        public String getUrlMedium() {
+            Preconditions.checkEmptyString(url_m, "To get this url, you should pass the parameter " + Extras.UrlMedium);
+            return url_m;
+        }
+
+        public int getHeightMedium() {
+            Preconditions.checkEmptyString(url_m, "To get this height, you should pass the parameter " + Extras.UrlMedium);
+            return height_m;
+        }
+
+        public int getWithMedium() {
+            Preconditions.checkEmptyString(url_m, "To get this width, you should pass the parameter " + Extras.UrlMedium);
+            return width_m;
         }
 
 
