@@ -1,8 +1,12 @@
 package com.github.flickr.api.interestingness;
 
 import com.github.commons.Request;
+import com.github.flickr.api.commons.Extras;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +35,7 @@ public class GetListRequest implements Request {
     */
 
     private String date;
-    private String extras;
+    private final List<Extras> extras = new ArrayList<Extras>();
     private Integer page;
 
     @Override
@@ -46,8 +50,8 @@ public class GetListRequest implements Request {
         if (date != null) {
             parameters.put("date", date);
         }
-        if (extras != null) {
-            parameters.put("extras", extras);
+        if (!extras.isEmpty()) {
+            parameters.put("extras", Extras.commaDelimited(extras));
         }
         if (page != null) {
             parameters.put("page", page);
@@ -59,8 +63,8 @@ public class GetListRequest implements Request {
         this.date = date;
     }
 
-    public void setExtras(String extras) {
-        this.extras = extras;
+    public void addExtras(Extras... extras) {
+        this.extras.addAll(Arrays.asList(extras));
     }
 
     public void setPage(Integer page) {
