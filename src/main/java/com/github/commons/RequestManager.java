@@ -17,13 +17,7 @@
 package com.github.commons;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.scribe.model.OAuthRequest;
 
 import java.io.IOException;
 
@@ -40,26 +34,15 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
 
 
     public RESPONSE call(REQUEST request) throws IOException {
-        final HttpClient httpclient = new DefaultHttpClient();
 
-        HttpRequestBase httpRequest = provider.createHttpRequest(request);
+        OAuthRequest httpRequest = provider.createHttpRequest(request);
+        provider.addRequestParameters(httpRequest, request);
 
-        try {
-            provider.setRequestParameters(httpRequest, request);
-            // Create a response handler
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            String responseBody = httpclient.execute(httpRequest, responseHandler);
-            try {
-                String json = provider.validateResponse(responseBody);
-                return gson.fromJson(json, clazz);
-            } catch (JsonParseException ex) {
-                throw new IOException("Ooops ! Error during decoding response " + responseBody + ". You may have sent a wrong request", ex);
-            }
-        } catch (HttpResponseException ex) {
-            throw new IOException("Oooopppss nothing found at the URL " + httpRequest.getURI(), ex);
-        } finally {
-            httpclient.getConnectionManager().shutdown();
-        }
+        org.scribe.model.Response response = httpRequest.send();
+
+        String responseBody = response.getBody();
+        String json = provider.validateResponse(responseBody);
+        return gson.fromJson(json, clazz);
 
     }
 

@@ -19,7 +19,9 @@ package com.github.commons;
 import java.util.Map;
 
 public interface Request {
-    String createServiceUrl(String baseUrl);
 
     Map<String, Object> buildParameters();
+
+    boolean isOAuth();
+
 }

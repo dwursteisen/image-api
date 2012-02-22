@@ -29,11 +29,12 @@ public class ImageRequest implements Request {
         this.hash = hash;
     }
 
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl + "image/" + hash + ".json";
-    }
-
     public Map<String, Object> buildParameters() {
         return new HashMap();
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -34,11 +34,12 @@ public class StatsRequest implements Request {
         this.view = view;
     }
 
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl + "stats" + ".json";
-    }
-
     public Map<String, Object> buildParameters() {
         return new HashMap();
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

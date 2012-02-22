@@ -2,15 +2,10 @@ package com.github.flickr;
 
 import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.Request;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Verb;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class FlickrRequestGenerator implements ProviderRequestGenerator {
@@ -29,37 +24,18 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator {
     }
 
     @Override
-    public HttpRequestBase createHttpRequest(Request request) {
-        String url = request.createServiceUrl(flickrBaseUrl);
-
-        if (!url.contains("?")) {
-            url = url.concat("?");
-        }
-
-        Map<String, Object> parameters = request.buildParameters();
-        parameters.put("api_key", apiKey);
-        parameters.put("format", "json");
-
-        List<NameValuePair> params = new LinkedList<NameValuePair>();
-
-        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-            params.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
-        }
-
-        String paramString = URLEncodedUtils.format(params, "utf-8");
-
-        url += paramString;
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Flickr url used : " + url);
-        }
-        return new HttpGet(url);
+    public OAuthRequest createHttpRequest(Request request) {
+        return new OAuthRequest(Verb.GET, flickrBaseUrl);
     }
 
-
     @Override
-    public void setRequestParameters(HttpRequestBase httpRequest, Request request) {
-
+    public void addRequestParameters(OAuthRequest httpRequest, Request request) {
+        Map<String, Object> params = request.buildParameters();
+        for (Map.Entry<String, Object> p : params.entrySet()) {
+            httpRequest.addQuerystringParameter(p.getKey(), "" + p.getValue());
+        }
+        httpRequest.addQuerystringParameter("format", "json");
+        httpRequest.addQuerystringParameter("api_key", apiKey);
     }
 
     @Override

@@ -3,11 +3,7 @@ package com.github.flickr.api.interestingness;
 import com.github.commons.Request;
 import com.github.flickr.api.commons.Extras;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: Wursteisen David
@@ -39,11 +35,6 @@ public class GetListRequest implements Request {
     private Integer page;
 
     @Override
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl;
-    }
-
-    @Override
     public Map<String, Object> buildParameters() {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("method", "flickr.interestingness.getList");
@@ -57,6 +48,11 @@ public class GetListRequest implements Request {
             parameters.put("page", page);
         }
         return parameters;
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;
     }
 
     public void setDate(String date) {

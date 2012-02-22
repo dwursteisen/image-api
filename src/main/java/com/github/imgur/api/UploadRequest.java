@@ -32,10 +32,6 @@ public class UploadRequest implements Request {
     private byte[] imageData;
     private URL imageUrl;
 
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl + "upload" + ".json";
-    }
-
     public Map<String, Object> buildParameters() {
         final Map<String, Object> result = new HashMap<String, Object>();
         if (imageUrl != null) {
@@ -49,6 +45,11 @@ public class UploadRequest implements Request {
 
 
         return result;
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public String getTitle() {
