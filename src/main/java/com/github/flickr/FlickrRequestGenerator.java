@@ -1,65 +1,40 @@
 package com.github.flickr;
 
 import com.github.commons.ProviderRequestGenerator;
-import com.github.commons.Request;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
+import com.github.flickr.api.commons.FlickrRequest;
 import org.apache.log4j.Logger;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Verb;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-public class FlickrRequestGenerator implements ProviderRequestGenerator {
+public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRequest> {
 
 
     private final static Logger LOG = Logger.getLogger(FlickrRequestGenerator.class);
 
-    private final String flickrBaseUrl;
+    private static final String FLICKR_BASE_URL = "http://api.flickr.com/services/rest/";
 
     private final String apiKey;
 
-    public FlickrRequestGenerator(String apiKey, String flickrBaseUrl) {
+
+    public FlickrRequestGenerator(String apiKey) {
         this.apiKey = apiKey;
-        this.flickrBaseUrl = flickrBaseUrl;
-
     }
 
     @Override
-    public HttpRequestBase createHttpRequest(Request request) {
-        String url = request.createServiceUrl(flickrBaseUrl);
-
-        if (!url.contains("?")) {
-            url = url.concat("?");
-        }
-
-        Map<String, Object> parameters = request.buildParameters();
-        parameters.put("api_key", apiKey);
-        parameters.put("format", "json");
-
-        List<NameValuePair> params = new LinkedList<NameValuePair>();
-
-        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-            params.add(new BasicNameValuePair(entry.getKey(), entry.getValue().toString()));
-        }
-
-        String paramString = URLEncodedUtils.format(params, "utf-8");
-
-        url += paramString;
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Flickr url used : " + url);
-        }
-        return new HttpGet(url);
+    public OAuthRequest createHttpRequest(FlickrRequest request) {
+        return new OAuthRequest(Verb.GET, FLICKR_BASE_URL);
     }
 
-
     @Override
-    public void setRequestParameters(HttpRequestBase httpRequest, Request request) {
-
+    public void addRequestParameters(OAuthRequest httpRequest, FlickrRequest request) {
+        Map<String, Object> params = request.buildParameters();
+        for (Map.Entry<String, Object> p : params.entrySet()) {
+            httpRequest.addQuerystringParameter(p.getKey(), "" + p.getValue());
+        }
+        httpRequest.addQuerystringParameter("format", "json");
+        httpRequest.addQuerystringParameter("api_key", apiKey);
     }
 
     @Override

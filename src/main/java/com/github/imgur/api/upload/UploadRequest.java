@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.imgur.api;
+package com.github.imgur.api.upload;
 
-import com.github.commons.Request;
+import com.github.imgur.api.commons.ImgurRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
@@ -27,14 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UploadRequest implements Request {
+public class UploadRequest extends ImgurRequest {
     private String title;
     private byte[] imageData;
     private URL imageUrl;
-
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl + "upload" + ".json";
-    }
 
     public Map<String, Object> buildParameters() {
         final Map<String, Object> result = new HashMap<String, Object>();
@@ -51,6 +47,11 @@ public class UploadRequest implements Request {
         return result;
     }
 
+    @Override
+    public boolean isOAuth() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public String getTitle() {
         return title;
     }
@@ -61,6 +62,11 @@ public class UploadRequest implements Request {
 
     public byte[] getImageData() {
         return imageData;
+    }
+
+    @Override
+    public String requestUrl(String baseUrl) {
+        return baseUrl + "upload.json";
     }
 
     public static class Builder {

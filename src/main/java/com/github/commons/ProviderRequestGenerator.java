@@ -1,12 +1,14 @@
 package com.github.commons;
 
-import org.apache.http.client.methods.HttpRequestBase;
+import org.scribe.model.OAuthRequest;
 
-public interface ProviderRequestGenerator {
+public interface ProviderRequestGenerator<REQUEST extends Request> {
 
-    HttpRequestBase createHttpRequest(Request request);
+    OAuthRequest createHttpRequest(REQUEST request);
 
-    void setRequestParameters(HttpRequestBase httpRequest, Request request);
+    void addRequestParameters(OAuthRequest httpRequest, REQUEST request);
 
     String validateResponse(String response);
+
+
 }

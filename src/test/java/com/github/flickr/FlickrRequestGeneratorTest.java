@@ -17,7 +17,7 @@ public class FlickrRequestGeneratorTest {
 
     @Before
     public void setUp() {
-        generator = new FlickrRequestGenerator("api", "baseUrl");
+        generator = new FlickrRequestGenerator("api");
     }
 
     @Test

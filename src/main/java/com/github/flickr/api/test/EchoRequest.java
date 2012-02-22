@@ -1,19 +1,14 @@
 package com.github.flickr.api.test;
 
-import com.github.commons.Request;
+import com.github.flickr.api.commons.FlickrRequest;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EchoRequest implements Request {
+public class EchoRequest extends FlickrRequest {
 
 
     private String testParameter = "This is a sample";
-
-    @Override
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl;
-    }
 
     @Override
     public Map<String, Object> buildParameters() {
@@ -21,6 +16,11 @@ public class EchoRequest implements Request {
         parameters.put("method", "flickr.test.echo");
         parameters.put("testParameter", testParameter);
         return parameters;
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;
     }
 
     public void setTestParameter(String testParameter) {

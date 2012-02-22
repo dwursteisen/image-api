@@ -1,39 +1,21 @@
 package com.github.flickr;
 
-import java.io.IOException;
-import java.util.Properties;
+import com.github.commons.Builder;
 
 /**
  * User: Wursteisen David
  * Date: 18/02/12
  * Time: 14:34
  */
-public class FlickrBuilder {
+public class FlickrBuilder extends Builder<Flickr> {
 
-    private String apiKey = null;
 
-    public FlickrBuilder withApiKey() {
-        java.io.InputStream is = this.getClass().getResourceAsStream("/secret.properties");
-        Properties properties = new Properties();
-        try {
-            properties.load(is);
-        } catch (IOException e) {
-            throw new RuntimeException("Error during loading secret.properties file :" +
-                    " Is the file into your test/resources directory ?");
-        }
-
-        apiKey = properties.getProperty("flickr.apikey");
-        return this;
+    public FlickrBuilder() {
+        super("flickr.apikey");
     }
 
-    public FlickrBuilder withApiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
-
+    @Override
     public Flickr build() {
-        return new Flickr(apiKey);
+        return new Flickr(getApiKey());
     }
-
-
 }

@@ -16,12 +16,21 @@
 
 package com.github.imgur.api;
 
+import com.github.imgur.ImgUrBuilder;
+import com.github.imgur.api.stats.StatsManager;
+import com.github.imgur.api.stats.StatsRequest;
+import com.github.imgur.api.stats.StatsResponse;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class StatsResponseTest {
@@ -38,6 +47,13 @@ public class StatsResponseTest {
                     "}" +
                     "}";
 
+    private static StatsManager statsManager;
+
+
+    @BeforeClass
+    public static void setUpClass() {
+        statsManager = new ImgUrBuilder().withApiKey().build().stats();
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -46,7 +62,7 @@ public class StatsResponseTest {
     }
 
     @Test
-    public void serialization() {
+    public void can_perform_serialization() {
         StatsResponse stats = new StatsResponse();
         stats.setMostPopularImages(new String[]{"gn2gN", "cXQqZ", "JiPqw", "WdRim", "zPxWo"});
         stats.setImagesUploaded(1627648);
@@ -59,9 +75,17 @@ public class StatsResponseTest {
     }
 
     @Test
-    public void deserialization() {
+    public void can_perform_deserialization() {
         StatsResponse stats = gson.fromJson(expectedResult, StatsResponse.class);
         assertEquals("4.58 TB", stats.getBandwidthUsed());
 
+    }
+
+
+    @Ignore("stats request no more working on imgur...")
+    @Test
+    public void can_call_imgur() throws IOException {
+        StatsResponse response = statsManager.call(new StatsRequest());
+        assertNotNull(response.getBandwidthUsed());
     }
 }

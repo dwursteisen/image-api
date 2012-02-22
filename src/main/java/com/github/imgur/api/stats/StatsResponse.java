@@ -15,7 +15,7 @@
  */
 
 
-package com.github.imgur.api;
+package com.github.imgur.api.stats;
 
 import com.github.commons.Response;
 import com.google.gson.annotations.SerializedName;

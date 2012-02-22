@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.imgur.api;
+package com.github.imgur.api.stats;
 
-import com.github.commons.Request;
+import com.github.imgur.api.commons.ImgurRequest;
+import org.scribe.model.Verb;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsRequest implements Request {
+public class StatsRequest extends ImgurRequest {
 
+    public StatsRequest() {
+        throw new RuntimeException("Oups ! This request is no more working on imgur...");
+    }
 
     private String view;
 
@@ -34,11 +38,22 @@ public class StatsRequest implements Request {
         this.view = view;
     }
 
-    public String createServiceUrl(String baseUrl) {
-        return baseUrl + "stats" + ".json";
-    }
-
     public Map<String, Object> buildParameters() {
         return new HashMap();
+    }
+
+    @Override
+    public boolean isOAuth() {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Verb getVerb() {
+        return Verb.GET;
+    }
+
+    @Override
+    public String requestUrl(String baseUrl) {
+        return baseUrl + "stats.json";
     }
 }

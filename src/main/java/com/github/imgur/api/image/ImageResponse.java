@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.imgur.api;
+package com.github.imgur.api.image;
 
 import com.github.commons.Response;
 import com.google.gson.annotations.SerializedName;
