@@ -1,7 +1,7 @@
 package com.github.flickr.api.interestingness;
 
-import com.github.commons.Request;
 import com.github.flickr.api.commons.Extras;
+import com.github.flickr.api.commons.FlickrRequest;
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ import java.util.*;
  * Date: 18/02/12
  * Time: 14:20
  */
-public class GetListRequest implements Request {
+public class GetListRequest extends FlickrRequest {
 
     /*
 

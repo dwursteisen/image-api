@@ -1,11 +1,11 @@
 package com.github.flickr.api.test;
 
-import com.github.commons.Request;
+import com.github.flickr.api.commons.FlickrRequest;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EchoRequest implements Request {
+public class EchoRequest extends FlickrRequest {
 
 
     private String testParameter = "This is a sample";

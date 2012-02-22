@@ -16,7 +16,12 @@
 
 package com.github.imgur.api;
 
+import com.github.imgur.ImgUrBuilder;
+import com.github.imgur.api.upload.UploadManager;
+import com.github.imgur.api.upload.UploadRequest;
+import com.github.imgur.api.upload.UploadResponse;
 import org.apache.commons.io.FileUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -28,6 +33,13 @@ import static org.junit.Assert.*;
 
 
 public class UploadRequestTest {
+
+    private static UploadManager uploadManager;
+
+    @BeforeClass
+    public static void setUpClass() {
+        uploadManager = new ImgUrBuilder().withApiKey().build().upload();
+    }
 
     @Test
     public void build() throws IOException {
@@ -98,6 +110,33 @@ public class UploadRequestTest {
         Map<String, Object> parameters = request.buildParameters();
         assertFalse(parameters.keySet().contains("title"));
         assertEquals("http://github.com/images/modules/header/logov3-hover.png", parameters.get("image").toString());
+    }
+
+    @Test
+    public void can_upload_url_image() throws IOException {
+        URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
+
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+        UploadRequest request = builder.withImageUrl(imageUrl).build();
+
+        UploadResponse response = uploadManager.call(request);
+        assertNotNull(response.getLinks());
+    }
+
+
+    @Test
+    public void can_upload_image_file() throws IOException {
+        final File image = new File("./src/test/resources/uploadme.jpg");
+        UploadRequest.Builder builder = new UploadRequest.Builder();
+
+        UploadRequest request = builder.withImageFile(image).build();
+        UploadResponse response = uploadManager.call(request);
+        assertNotNull(response.getLinks());
+
+        System.err.println("...just upload an image that you will find on the url : ");
+        System.err.println("URL : " + response.getLinks().getImgurPage());
+        System.err.println("DELETE URL : " + response.getLinks().getDeletePage());
+
     }
 
 }

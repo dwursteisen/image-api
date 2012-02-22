@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.github.imgur.api;
+package com.github.imgur.api.upload;
 
-import com.github.commons.Request;
+import com.github.imgur.api.commons.ImgurRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UploadRequest implements Request {
+public class UploadRequest extends ImgurRequest {
     private String title;
     private byte[] imageData;
     private URL imageUrl;
@@ -62,6 +62,11 @@ public class UploadRequest implements Request {
 
     public byte[] getImageData() {
         return imageData;
+    }
+
+    @Override
+    public String requestUrl(String baseUrl) {
+        return baseUrl + "upload.json";
     }
 
     public static class Builder {

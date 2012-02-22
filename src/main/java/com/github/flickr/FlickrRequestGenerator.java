@@ -1,35 +1,34 @@
 package com.github.flickr;
 
 import com.github.commons.ProviderRequestGenerator;
-import com.github.commons.Request;
+import com.github.flickr.api.commons.FlickrRequest;
 import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Verb;
 
 import java.util.Map;
 
-public class FlickrRequestGenerator implements ProviderRequestGenerator {
+public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRequest> {
 
 
     private final static Logger LOG = Logger.getLogger(FlickrRequestGenerator.class);
 
-    private final String flickrBaseUrl;
+    private static final String FLICKR_BASE_URL = "http://api.flickr.com/services/rest/";
 
     private final String apiKey;
 
-    public FlickrRequestGenerator(String apiKey, String flickrBaseUrl) {
+
+    public FlickrRequestGenerator(String apiKey) {
         this.apiKey = apiKey;
-        this.flickrBaseUrl = flickrBaseUrl;
-
     }
 
     @Override
-    public OAuthRequest createHttpRequest(Request request) {
-        return new OAuthRequest(Verb.GET, flickrBaseUrl);
+    public OAuthRequest createHttpRequest(FlickrRequest request) {
+        return new OAuthRequest(Verb.GET, FLICKR_BASE_URL);
     }
 
     @Override
-    public void addRequestParameters(OAuthRequest httpRequest, Request request) {
+    public void addRequestParameters(OAuthRequest httpRequest, FlickrRequest request) {
         Map<String, Object> params = request.buildParameters();
         for (Map.Entry<String, Object> p : params.entrySet()) {
             httpRequest.addQuerystringParameter(p.getKey(), "" + p.getValue());

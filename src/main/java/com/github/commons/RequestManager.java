@@ -41,6 +41,10 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         org.scribe.model.Response response = httpRequest.send();
 
         String responseBody = response.getBody();
+        if (!response.isSuccessful()) {
+            throw new IOException("Oups ! Problem occur with your request " + request
+                    + " ! The called webservice respond with " + responseBody);
+        }
         String json = provider.validateResponse(responseBody);
         return gson.fromJson(json, clazz);
 

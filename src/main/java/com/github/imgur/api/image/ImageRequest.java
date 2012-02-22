@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.imgur.api;
+package com.github.imgur.api.image;
 
-import com.github.commons.Request;
+import com.github.imgur.api.commons.ImgurRequest;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsRequest implements Request {
 
+public class ImageRequest extends ImgurRequest {
+    private String hash;
 
-    private String view;
-
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
+    public ImageRequest(String hash) {
+        this.hash = hash;
     }
 
     public Map<String, Object> buildParameters() {
@@ -41,5 +36,10 @@ public class StatsRequest implements Request {
     @Override
     public boolean isOAuth() {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String requestUrl(String baseUrl) {
+        return baseUrl + "image/" + hash + ".json";
     }
 }

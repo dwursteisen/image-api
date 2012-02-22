@@ -2,11 +2,11 @@ package com.github.commons;
 
 import org.scribe.model.OAuthRequest;
 
-public interface ProviderRequestGenerator {
+public interface ProviderRequestGenerator<REQUEST extends Request> {
 
-    OAuthRequest createHttpRequest(Request request);
+    OAuthRequest createHttpRequest(REQUEST request);
 
-    void addRequestParameters(OAuthRequest httpRequest, Request request);
+    void addRequestParameters(OAuthRequest httpRequest, REQUEST request);
 
     String validateResponse(String response);
 
