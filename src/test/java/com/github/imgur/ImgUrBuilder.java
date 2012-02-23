@@ -10,7 +10,7 @@ import com.github.commons.Builder;
 public class ImgUrBuilder extends Builder<ImgUr> {
 
     public ImgUrBuilder() {
-        super("imgur.apikey");
+        super("imgur.apikey", "imgur.secret");
     }
 
     @Override

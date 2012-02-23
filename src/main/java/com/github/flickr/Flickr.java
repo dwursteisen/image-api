@@ -18,8 +18,8 @@ public class Flickr {
 
     private final OAuthService oauth;
 
-    public Flickr(final String apiKey) {
-        this(apiKey, new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret("").build());
+    public Flickr(final String apiKey, final String secret) {
+        this(apiKey, new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(secret).build());
     }
 
     public Flickr(final String apiKey, final OAuthService oauthService) {

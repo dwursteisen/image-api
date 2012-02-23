@@ -37,9 +37,11 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRe
     @Override
     public void addRequestParameters(OAuthRequest httpRequest, FlickrRequest request) {
         Map<String, Object> params = request.buildParameters();
+
         for (Map.Entry<String, Object> p : params.entrySet()) {
             httpRequest.addQuerystringParameter(p.getKey(), "" + p.getValue());
         }
+
         httpRequest.addQuerystringParameter("format", "json");
         httpRequest.addQuerystringParameter("api_key", apiKey);
     }

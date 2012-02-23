@@ -11,11 +11,11 @@ public class FlickrBuilder extends Builder<Flickr> {
 
 
     public FlickrBuilder() {
-        super("flickr.apikey");
+        super("flickr.apikey", "flickr.secret");
     }
 
     @Override
     public Flickr build() {
-        return new Flickr(getApiKey());
+        return new Flickr(getApiKey(), getSecret());
     }
 }
