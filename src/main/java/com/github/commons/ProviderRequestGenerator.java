@@ -10,5 +10,6 @@ public interface ProviderRequestGenerator<REQUEST extends Request> {
 
     String validateResponse(String response);
 
+    void signRequest(OAuthRequest httpRequest, REQUEST request);
 
 }

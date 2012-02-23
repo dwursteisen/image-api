@@ -9,7 +9,7 @@ public class EchoResponseTest {
     @Test
     public void can_parse_response() {
 
-        StringBuffer jsonResponse = new StringBuffer();
+        StringBuilder jsonResponse = new StringBuilder();
         jsonResponse.append("{");
         jsonResponse.append("\"method\": { \"_content\":\"flickr.test.echo\" },");
         jsonResponse.append("\"name\":{\"_content\":\"value\"},");

@@ -48,4 +48,9 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator<ImgurRequ
         }
         return response;
     }
+
+    @Override
+    public void signRequest(OAuthRequest httpRequest, ImgurRequest request) {
+
+    }
 }

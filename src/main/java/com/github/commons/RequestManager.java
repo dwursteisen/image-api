@@ -25,9 +25,9 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
 
     private final Class<RESPONSE> clazz;
     private final Gson gson = new Gson();
-    private final ProviderRequestGenerator<REQUEST> provider;
+    private final ProviderRequestGenerator<Request> provider;
 
-    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator<REQUEST> provider) {
+    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator<Request> provider) {
         this.clazz = clazz;
         this.provider = provider;
     }
@@ -38,6 +38,9 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         OAuthRequest httpRequest = provider.createHttpRequest(request);
         provider.addRequestParameters(httpRequest, request);
 
+        if (request.isOAuth()) {
+            provider.signRequest(httpRequest, request);
+        }
         org.scribe.model.Response response = httpRequest.send();
 
         String responseBody = response.getBody();
