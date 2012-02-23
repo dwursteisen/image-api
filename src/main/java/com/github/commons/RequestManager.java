@@ -25,9 +25,9 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
 
     private final Class<RESPONSE> clazz;
     private final Gson gson = new Gson();
-    private final ProviderRequestGenerator provider;
+    private final ProviderRequestGenerator<REQUEST> provider;
 
-    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator provider) {
+    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator<REQUEST> provider) {
         this.clazz = clazz;
         this.provider = provider;
     }
@@ -43,7 +43,7 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         String responseBody = response.getBody();
         if (!response.isSuccessful()) {
             throw new IOException("Oups ! Problem occur with your request " + request
-                    + " ! The called webservice respond with " + responseBody);
+                                  + " ! The called webservice respond with " + responseBody);
         }
         String json = provider.validateResponse(responseBody);
         return gson.fromJson(json, clazz);
