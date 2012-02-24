@@ -10,7 +10,7 @@ import com.github.commons.RequestManager;
  */
 public class ImageManager extends RequestManager<ImageRequest, ImageResponse> {
 
-    public ImageManager(Class<ImageResponse> clazz, ProviderRequestGenerator provider) {
-        super(clazz, provider);
+    public ImageManager(ProviderRequestGenerator provider) {
+        super(ImageResponse.class, provider);
     }
 }

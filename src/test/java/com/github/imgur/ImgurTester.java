@@ -1,7 +1,9 @@
-package com.github.flickr;
+package com.github.imgur;
 
-import com.github.flickr.api.test.LoginRequest;
-import com.github.flickr.api.test.LoginResponse;
+import com.github.imgur.api.account.AccountRequest;
+import com.github.imgur.api.account.AccountResponse;
+import com.github.imgur.api.upload.UploadRequest;
+import com.github.imgur.api.upload.UploadResponse;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 
@@ -9,19 +11,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * User: Wursteisen David
  * Date: 23/02/12
  * Time: 21:46
  */
-public class FlickrTester {
+public class ImgurTester {
 
-    private static final Flickr flickr = new FlickrBuilder().withApiKey().build();
+    private static final ImgUr imgur = new ImgUrBuilder().withApiKey().build();
 
-    public void can_oauth_on_flick() throws IOException {
-        final Token requestToken = flickr.getRequestToken();
-        String url = flickr.getAuthorizationUrl(requestToken);
+    public void can_oauth() throws IOException {
+        final Token requestToken = imgur.getRequestToken();
+        String url = imgur.getAuthorizationUrl(requestToken);
 
 
         final JTextField userInput = new JTextField(10);
@@ -39,15 +42,15 @@ public class FlickrTester {
         userToken.add(buttonOk);
 
 
-        JPanel flickrResponse = new JPanel();
-        flickrResponse.add(response);
+        JPanel serviceResponse = new JPanel();
+        serviceResponse.add(response);
 
-        JFrame mainFrame = new JFrame("Oauth with Flickr");
+        JFrame mainFrame = new JFrame("Oauth with imgur");
         JPanel frame = new JPanel();
         frame.setLayout(new BoxLayout(frame, BoxLayout.PAGE_AXIS));
         frame.add(authorization);
         frame.add(userToken);
-        frame.add(flickrResponse);
+        frame.add(serviceResponse);
 
         mainFrame.setContentPane(frame);
         mainFrame.pack();
@@ -57,9 +60,16 @@ public class FlickrTester {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Verifier verifier = new Verifier(userInput.getText());
-                Token accessToken = flickr.getAccessToken(requestToken, verifier);
+                Token accessToken = imgur.getAccessToken(requestToken, verifier);
                 try {
-                    LoginResponse r = flickr.login().call(new LoginRequest(accessToken));
+                    URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
+
+                    UploadRequest.Builder builder = new UploadRequest.Builder();
+                    UploadRequest request = builder.withImageUrl(imageUrl)
+                                            .withAccessToken(accessToken).build();
+
+                    UploadResponse r = imgur.upload().call(request);
+
                     response.setText(r.toString());
                 } catch (IOException e1) {
                     response.setText("Oups ! Got exception : " + e1);
@@ -74,6 +84,6 @@ public class FlickrTester {
     }
 
     public static void main(String[] args) throws IOException {
-        new FlickrTester().can_oauth_on_flick();
+        new ImgurTester().can_oauth();
     }
 }

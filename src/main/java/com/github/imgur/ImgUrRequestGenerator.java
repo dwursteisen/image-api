@@ -4,7 +4,9 @@ import com.github.commons.ProviderRequestGenerator;
 import com.github.imgur.api.commons.ImgurRequest;
 import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
+import org.scribe.model.Token;
 import org.scribe.model.Verb;
+import org.scribe.oauth.OAuthService;
 
 import java.util.Map;
 
@@ -15,9 +17,15 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator<ImgurRequ
     private static final String IMGUR_BASE_URL = "http://api.imgur.com/2/";
 
     private final String apiKey;
+    private final OAuthService oauth;
 
     public ImgUrRequestGenerator(String apiKey) {
+        this(apiKey, null);
+    }
+
+    public ImgUrRequestGenerator(String apiKey, OAuthService oauth) {
         this.apiKey = apiKey;
+        this.oauth = oauth;
     }
 
     @Override
@@ -36,8 +44,13 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator<ImgurRequ
                 httpRequest.addBodyParameter(p.getKey(), "" + p.getValue());
             }
         }
-
-        httpRequest.addBodyParameter("key", apiKey);
+        if (!request.isOAuth() && apiKey != null) {
+            if (verb == Verb.GET) {
+                httpRequest.addQuerystringParameter("key", apiKey);
+            } else {
+                httpRequest.addBodyParameter("key", apiKey);
+            }
+        }
 
     }
 
@@ -51,6 +64,14 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator<ImgurRequ
 
     @Override
     public void signRequest(OAuthRequest httpRequest, ImgurRequest request) {
-
+        Token accessToken = request.getAccessToken();
+        if (accessToken == null && request.isOAuth()) {
+            throw new IllegalArgumentException("Oups ! You try to access to an resource "
+                    + "which need authentication, "
+                    + "and you haven't set an "
+                    + "access token on your request " + request + ". "
+                    + "Please set this token and retry.");
+        }
+        oauth.signRequest(accessToken, httpRequest);
     }
 }

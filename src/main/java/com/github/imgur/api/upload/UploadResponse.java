@@ -163,4 +163,9 @@ public class UploadResponse implements Response {
             return largeThumbnail;
         }
     }
+
+    @Override
+    public String toString() {
+        return "{upload : delete links "+getLinks().getDeletePage() + " }";
+    }
 }

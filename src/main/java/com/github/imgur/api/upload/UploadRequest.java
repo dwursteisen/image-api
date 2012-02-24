@@ -19,6 +19,7 @@ package com.github.imgur.api.upload;
 import com.github.imgur.api.commons.ImgurRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
+import org.scribe.model.Token;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class UploadRequest extends ImgurRequest {
 
     @Override
     public boolean isOAuth() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return (getAccessToken() != null);
     }
 
     public String getTitle() {
@@ -74,6 +75,7 @@ public class UploadRequest extends ImgurRequest {
         private String title;
         private File imageFile;
         private URL imageUrl;
+        private Token accessToken;
 
         public Builder withImageData(byte[] imageData) {
             this.imageData = imageData;
@@ -104,11 +106,19 @@ public class UploadRequest extends ImgurRequest {
             if (this.imageFile != null) {
                 request.imageData = FileUtils.readFileToByteArray(imageFile);
             }
+            if(accessToken != null) {
+                request.setAccessToken(accessToken);
+            }
             return request;
         }
 
         public Builder withTitle(String title) {
             this.title = title;
+            return this;
+        }
+        
+        public Builder withAccessToken(Token accessToken) {
+            this.accessToken = accessToken;
             return this;
         }
     }

@@ -1,5 +1,6 @@
 package com.github.flickr;
 
+import com.github.commons.OAuthSupport;
 import com.github.commons.ProviderRequestGenerator;
 import com.github.flickr.api.commons.FlickrRequest;
 import com.github.flickr.api.interestingness.GetListManager;
@@ -11,32 +12,18 @@ import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 
-public class Flickr {
+public class Flickr extends OAuthSupport {
 
 
     private final ProviderRequestGenerator<? extends FlickrRequest> generator;
-
-    private final OAuthService oauth;
 
     public Flickr(final String apiKey, final String secret) {
         this(apiKey, new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(secret).build());
     }
 
     public Flickr(final String apiKey, final OAuthService oauthService) {
-        this.oauth = oauthService;
+        super(oauthService);
         this.generator = new FlickrRequestGenerator(apiKey, oauth);
-    }
-
-    public Token getRequestToken() {
-        return oauth.getRequestToken();
-    }
-
-    public String getAuthorizationUrl(Token requestToken) {
-        return oauth.getAuthorizationUrl(requestToken);
-    }
-
-    public Token getAccessToken(Token requestToken, Verifier verifier) {
-        return oauth.getAccessToken(requestToken, verifier);
     }
 
     public EchoManager echo() {

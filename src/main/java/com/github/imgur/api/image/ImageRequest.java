@@ -30,12 +30,12 @@ public class ImageRequest extends ImgurRequest {
     }
 
     public Map<String, Object> buildParameters() {
-        return new HashMap();
+        return emptyParameters();
     }
 
     @Override
     public boolean isOAuth() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override

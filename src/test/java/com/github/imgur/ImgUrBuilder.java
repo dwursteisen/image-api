@@ -15,6 +15,6 @@ public class ImgUrBuilder extends Builder<ImgUr> {
 
     @Override
     public ImgUr build() {
-        return new ImgUr(getApiKey());
+        return new ImgUr(getApiKey(), getSecret());
     }
 }

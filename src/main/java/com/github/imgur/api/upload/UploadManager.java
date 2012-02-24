@@ -10,7 +10,7 @@ import com.github.commons.RequestManager;
  */
 public class UploadManager extends RequestManager<UploadRequest, UploadResponse> {
 
-    public UploadManager(Class<UploadResponse> clazz, ProviderRequestGenerator provider) {
-        super(clazz, provider);
+    public UploadManager(ProviderRequestGenerator provider) {
+        super(UploadResponse.class, provider);
     }
 }

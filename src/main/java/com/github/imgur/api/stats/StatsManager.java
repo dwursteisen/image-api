@@ -10,7 +10,7 @@ import com.github.commons.RequestManager;
  */
 public class StatsManager extends RequestManager<StatsRequest, StatsResponse> {
 
-    public StatsManager(Class<StatsResponse> clazz, ProviderRequestGenerator provider) {
-        super(clazz, provider);
+    public StatsManager(ProviderRequestGenerator provider) {
+        super(StatsResponse.class, provider);
     }
 }
