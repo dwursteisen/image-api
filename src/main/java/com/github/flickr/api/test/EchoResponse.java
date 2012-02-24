@@ -1,9 +1,10 @@
 package com.github.flickr.api.test;
 
 import com.github.commons.Response;
-import com.google.gson.annotations.SerializedName;
+import com.github.flickr.api.commons.FlickrContent;
 
 public class EchoResponse implements Response {
+
 
     /**
      * jsonFlickrApi(
@@ -16,16 +17,6 @@ public class EchoResponse implements Response {
      * }
      * )
      */
-
-    private static class FlickrContent {
-        @SerializedName("_content")
-        private String content;
-
-        public String getContent() {
-            return content;
-        }
-    }
-
     private FlickrContent method;
     private FlickrContent name;
     private FlickrContent testParameter;
