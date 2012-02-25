@@ -93,3 +93,16 @@ Skip tests !
 Got an issue?
 --------------
 Just fill an [issue](https://github.com/dwursteisen/imgur-API/issues) with your use case (service used, request, response received, response expected, ...)
+
+Image api dependencies:
+----
+
+    imgur-api:imgur-api:jar:1.0-SNAPSHOT
+    +- com.google.code.gson:gson:jar:2.1:compile
+    +- org.scribe:scribe:jar:1.3.1-SNAPSHOT:compile
+    |  \- commons-codec:commons-codec:jar:1.4:compile
+    +- junit:junit:jar:4.8.2:compile
+    +- commons-lang:commons-lang:jar:2.6:test
+    +- org.mockito:mockito-all:jar:1.9.0:test
+    +- commons-io:commons-io:jar:2.1:compile
+    \- log4j:log4j:jar:1.2.16:compile
