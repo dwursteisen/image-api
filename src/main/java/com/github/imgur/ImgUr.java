@@ -3,11 +3,8 @@ package com.github.imgur;
 import com.github.commons.OAuthSupport;
 import com.github.imgur.api.account.AccountManager;
 import com.github.imgur.api.image.ImageManager;
-import com.github.imgur.api.image.ImageResponse;
 import com.github.imgur.api.stats.StatsManager;
-import com.github.imgur.api.stats.StatsResponse;
 import com.github.imgur.api.upload.UploadManager;
-import com.github.imgur.api.upload.UploadResponse;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.ImgUrApi;
 import org.scribe.oauth.OAuthService;
@@ -20,6 +17,10 @@ import org.scribe.oauth.OAuthService;
 public class ImgUr extends OAuthSupport {
     private final ImgUrRequestGenerator requestGenerator;
 
+
+    public ImgUr(String apiKey) {
+        this(apiKey, (OAuthService) null);
+    }
 
     public ImgUr(String apiKey, OAuthService oauth) {
         super(oauth);

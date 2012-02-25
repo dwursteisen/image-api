@@ -52,8 +52,8 @@ public class GetListResponse implements Response {
         private String server;
         private int farm;
         private String title;
-        private boolean ispublic;
-        private boolean isfamily;
+        private int ispublic;
+        private int isfamily;
         private String url_m;
         private int height_m;
         private int width_m;
@@ -83,11 +83,11 @@ public class GetListResponse implements Response {
         }
 
         public boolean isPublic() {
-            return ispublic;
+            return ispublic == 1;
         }
 
         public boolean isFamily() {
-            return isfamily;
+            return isfamily == 1;
         }
 
         public String getUrlMedium() {

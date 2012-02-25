@@ -38,7 +38,7 @@ public class UploadRequestTest {
 
     @BeforeClass
     public static void setUpClass() {
-        uploadManager = new ImgUrBuilder().withApiKey().build().upload();
+        uploadManager = new ImgUrBuilder().withAnonymousKey().build().upload();
     }
 
     @Test

@@ -60,9 +60,9 @@ public class ImageResponse implements Response {
         private boolean animated;
         private int width;
         private int height;
-        private int size;
-        private int views;
-        private int bandwidth;
+        private long size;
+        private long views;
+        private long bandwidth;
 
         public String getTitle() {
             return title;
@@ -96,15 +96,15 @@ public class ImageResponse implements Response {
             return height;
         }
 
-        public int getSize() {
+        public long getSize() {
             return size;
         }
 
-        public int getViews() {
+        public long getViews() {
             return views;
         }
 
-        public int getBandwidth() {
+        public long getBandwidth() {
             return bandwidth;
         }
     }
