@@ -1,4 +1,4 @@
-package com.github.flickr.api.interestingness;
+package com.github.flickr.api.people;
 
 import com.github.commons.Response;
 import com.github.flickr.api.model.Photo;
@@ -9,34 +9,20 @@ import java.util.List;
 
 /**
  * User: Wursteisen David
- * Date: 18/02/12
- * Time: 14:20
+ * Date: 26/02/12
+ * Time: 15:42
  */
-public class GetListResponse implements Response {
+public class GetPhotosResponse implements Response {
     /*
-    jsonFlickrApi({
-        "photos":{
-            "page":1,
-            "pages":5,
-            "perpage":100,
-            "total":500,
-            "photo":[
-                {
-                 "id":"6892914257",
-                 "owner":"55237190@N00",
-                 "secret":"2cf3a1af62",
-                 "server":"7043",
-                 "farm":8,
-                 "title":"",
-                 "ispublic":1,
-                 "isfriend":0,
-                 "isfamily":0
-                 }
-            ]},
-        "stat":"ok"
-    })
-     */
-
+            jsonFlickrApi({"photos":
+                {"page":1,
+                "pages":2,
+                "perpage":100,
+                "total":"200",
+                "photo":[
+                    { ... },
+                 "stat":"ok"})
+    */
     private Photos photos;
     private String stat;
 
@@ -63,4 +49,5 @@ public class GetListResponse implements Response {
     public List<Photo> getPhotos() {
         return new ArrayList<Photo>(photos.getPhoto());
     }
+
 }

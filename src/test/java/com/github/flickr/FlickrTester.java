@@ -8,7 +8,9 @@ import org.scribe.model.Verifier;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  * User: Wursteisen David
@@ -59,6 +61,10 @@ public class FlickrTester {
                 Verifier verifier = new Verifier(userInput.getText());
                 Token accessToken = flickr.getAccessToken(requestToken, verifier);
                 try {
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("flickr.token"));
+                    out.writeObject(accessToken);
+                    out.close();
+
                     LoginResponse r = flickr.login().call(new LoginRequest(accessToken));
                     response.setText(r.toString());
                 } catch (IOException e1) {

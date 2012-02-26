@@ -3,6 +3,9 @@ package com.github.flickr.api.commons;
 import com.github.commons.Request;
 import org.scribe.model.Token;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: Wursteisen David
  * Date: 22/02/12
@@ -17,5 +20,11 @@ public abstract class FlickrRequest implements Request {
 
     public void setAccessToken(Token accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public Map<String, Object> emptyParameters(String method) {
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("method", method);
+        return params;
     }
 }

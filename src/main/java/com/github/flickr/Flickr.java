@@ -4,6 +4,7 @@ import com.github.commons.OAuthSupport;
 import com.github.commons.ProviderRequestGenerator;
 import com.github.flickr.api.commons.FlickrRequest;
 import com.github.flickr.api.interestingness.GetListManager;
+import com.github.flickr.api.people.GetPhotosManager;
 import com.github.flickr.api.test.EchoManager;
 import com.github.flickr.api.test.LoginManager;
 import org.scribe.builder.ServiceBuilder;
@@ -36,5 +37,9 @@ public class Flickr extends OAuthSupport {
 
     public GetListManager interestingness() {
         return new GetListManager(generator);
+    }
+
+    public GetPhotosManager photos() {
+        return new GetPhotosManager(generator);
     }
 }
