@@ -22,6 +22,13 @@ public class Flickr extends OAuthSupport {
 
     private final ProviderRequestGenerator generator;
 
+    public Flickr(final String apiKey, final String secret, final String callback) {
+        this(apiKey, new ServiceBuilder().provider(FlickrApi.class)
+                .callback(callback)
+                .apiKey(apiKey)
+                .apiSecret(secret).build());
+    }
+
     public Flickr(final String apiKey, final String secret) {
         this(apiKey, new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(secret).build());
     }
