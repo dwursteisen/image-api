@@ -1,5 +1,6 @@
 package com.github.imgur.api.image;
 
+import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
 import com.google.gson.Gson;
 import org.junit.BeforeClass;
@@ -17,11 +18,11 @@ import static org.junit.Assert.assertNotNull;
  */
 public class ImageManagerTest {
 
-    private static ImageManager imageManager;
+    private static ImgUr imgur;
 
     @BeforeClass
     public static void setUpClass() {
-        imageManager = new ImgUrBuilder().withApiKey().build().image();
+        imgur = new ImgUrBuilder().withApiKey().build();
     }
 
     private static final String imgUrResponse =
@@ -56,7 +57,7 @@ public class ImageManagerTest {
     @Test
     public void can_call_imgur() throws IOException {
         final String hash = "ABktn";
-        ImageResponse result = imageManager.call(new ImageRequest(hash));
+        ImageResponse result = imgur.call(new ImageRequest(hash));
 
         assertNotNull(result.getImageProperty());
         assertEquals("2010-08-31 12:10:40", result.getImageProperty().getDatetime());
@@ -65,7 +66,7 @@ public class ImageManagerTest {
     @Test(expected = IOException.class)
     public void cant_ask_fake_image() throws IOException {
         final String hash = "FAKE";
-        imageManager.call(new ImageRequest(hash));
+        imgur.call(new ImageRequest(hash));
     }
 
 

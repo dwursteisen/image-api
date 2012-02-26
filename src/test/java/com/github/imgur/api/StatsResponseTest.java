@@ -16,8 +16,8 @@
 
 package com.github.imgur.api;
 
+import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
-import com.github.imgur.api.stats.StatsManager;
 import com.github.imgur.api.stats.StatsRequest;
 import com.github.imgur.api.stats.StatsResponse;
 import com.google.gson.Gson;
@@ -47,12 +47,12 @@ public class StatsResponseTest {
                     "}" +
                     "}";
 
-    private static StatsManager statsManager;
 
+    private static ImgUr imgur;
 
     @BeforeClass
     public static void setUpClass() {
-        statsManager = new ImgUrBuilder().withApiKey().build().stats();
+        imgur = new ImgUrBuilder().withApiKey().build();
     }
 
     @Before
@@ -85,7 +85,7 @@ public class StatsResponseTest {
     @Ignore("stats request no more working on imgur...")
     @Test
     public void can_call_imgur() throws IOException {
-        StatsResponse response = statsManager.call(new StatsRequest());
+        StatsResponse response = imgur.call(new StatsRequest());
         assertNotNull(response.getBandwidthUsed());
     }
 }

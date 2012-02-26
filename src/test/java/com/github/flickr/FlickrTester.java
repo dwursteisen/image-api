@@ -65,7 +65,7 @@ public class FlickrTester {
                     out.writeObject(accessToken);
                     out.close();
 
-                    LoginResponse r = flickr.login().call(new LoginRequest(accessToken));
+                    LoginResponse r = flickr.call(new LoginRequest(accessToken));
                     response.setText(r.toString());
                 } catch (IOException e1) {
                     response.setText("Oups ! Got exception : " + e1);

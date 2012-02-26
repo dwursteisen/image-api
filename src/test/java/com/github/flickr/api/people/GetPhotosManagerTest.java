@@ -2,7 +2,6 @@ package com.github.flickr.api.people;
 
 import com.github.flickr.Flickr;
 import com.github.flickr.FlickrBuilder;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,7 +26,7 @@ public class GetPhotosManagerTest {
     @Test
     public void can_call_flickr() throws IOException {
         GetPhotosRequest request = new GetPhotosRequest(FlickrBuilder.getAccessToken());
-        GetPhotosResponse response = flickr.photos().call(request);
+        GetPhotosResponse response = flickr.call(request);
         assertEquals("ok", response.getStat());
 
     }

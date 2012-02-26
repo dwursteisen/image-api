@@ -18,15 +18,15 @@ as the example just bellow
 ### With Flickr
     Flickr flickrProvider = new Flickr("YOUR API KEY", "YOUR API SECRET");
 
-Then, just call a method from the Flickr API with a request, and you'll get a response from flickr !
+Then, just call  Flickr with a request, and you'll get a response !
 
-    flickrProvider.echo().call(new EchoRequest());
+    flickrProvider.call(new EchoRequest());
 
 If your request need parameters, just configure it with the request (ie : myRequest.setMyParameter());
 
     EchoRequest request = new EchoRequest();
     request.setTestParameter("My Test Parameter");
-    EchoResponse response = flickrProvider.echo().call(request);
+    EchoResponse response = flickrProvider.call(request);
 
 The response will represent the response from the web service.
 So, for this [echo method](http://www.flickr.com/services/api/flickr.test.echo.html), you'll be able to check
@@ -45,11 +45,11 @@ If you want to use the authenticated api (with oauth):
 
 then you can call imgur like this :
 
-    ImageResponse response = imgurProvider.image().call(new ImageRequest("An imgur image hashcode"));
+    ImageResponse response = imgurProvider.call(new ImageRequest("An imgur image hashcode"));
 
 or like this for an authenticated resources :
 
-    AccountResponse = imgurProvider.account().call(new AccountRequest(yourAccessToken));
+    AccountResponse = imgurProvider.call(new AccountRequest(yourAccessToken));
 
 How to use the authentication based on oauth ?
 --------

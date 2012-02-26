@@ -1,13 +1,20 @@
 package com.github.imgur;
 
 import com.github.commons.OAuthSupport;
-import com.github.imgur.api.account.AccountManager;
-import com.github.imgur.api.image.ImageManager;
-import com.github.imgur.api.stats.StatsManager;
-import com.github.imgur.api.upload.UploadManager;
+import com.github.commons.RequestManager;
+import com.github.imgur.api.account.AccountRequest;
+import com.github.imgur.api.account.AccountResponse;
+import com.github.imgur.api.image.ImageRequest;
+import com.github.imgur.api.image.ImageResponse;
+import com.github.imgur.api.stats.StatsRequest;
+import com.github.imgur.api.stats.StatsResponse;
+import com.github.imgur.api.upload.UploadRequest;
+import com.github.imgur.api.upload.UploadResponse;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.ImgUrApi;
 import org.scribe.oauth.OAuthService;
+
+import java.io.IOException;
 
 /**
  * User: Wursteisen David
@@ -34,19 +41,20 @@ public class ImgUr extends OAuthSupport {
                 .build());
     }
 
-    public UploadManager upload() {
-        return new UploadManager(requestGenerator);
+    public AccountResponse call(AccountRequest request) throws IOException {
+        return new RequestManager(requestGenerator).call(request, AccountResponse.class);
     }
 
-    public StatsManager stats() {
-        return new StatsManager(requestGenerator);
+    public ImageResponse call(ImageRequest request) throws IOException {
+        return new RequestManager(requestGenerator).call(request, ImageResponse.class);
     }
 
-    public ImageManager image() {
-        return new ImageManager(requestGenerator);
+    public StatsResponse call(StatsRequest request) throws IOException {
+        return new RequestManager(requestGenerator).call(request, StatsResponse.class);
     }
 
-    public AccountManager account() {
-        return new AccountManager(requestGenerator);
+    public UploadResponse call(UploadRequest request) throws IOException {
+        return new RequestManager(requestGenerator).call(request, UploadResponse.class);
     }
+
 }

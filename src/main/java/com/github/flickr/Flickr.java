@@ -2,21 +2,25 @@ package com.github.flickr;
 
 import com.github.commons.OAuthSupport;
 import com.github.commons.ProviderRequestGenerator;
-import com.github.flickr.api.commons.FlickrRequest;
-import com.github.flickr.api.interestingness.GetListManager;
-import com.github.flickr.api.people.GetPhotosManager;
-import com.github.flickr.api.test.EchoManager;
-import com.github.flickr.api.test.LoginManager;
+import com.github.commons.RequestManager;
+import com.github.flickr.api.interestingness.GetListRequest;
+import com.github.flickr.api.interestingness.GetListResponse;
+import com.github.flickr.api.people.GetPhotosRequest;
+import com.github.flickr.api.people.GetPhotosResponse;
+import com.github.flickr.api.test.EchoRequest;
+import com.github.flickr.api.test.EchoResponse;
+import com.github.flickr.api.test.LoginRequest;
+import com.github.flickr.api.test.LoginResponse;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.FlickrApi;
-import org.scribe.model.Token;
-import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+
+import java.io.IOException;
 
 public class Flickr extends OAuthSupport {
 
 
-    private final ProviderRequestGenerator<? extends FlickrRequest> generator;
+    private final ProviderRequestGenerator generator;
 
     public Flickr(final String apiKey, final String secret) {
         this(apiKey, new ServiceBuilder().provider(FlickrApi.class).apiKey(apiKey).apiSecret(secret).build());
@@ -27,19 +31,20 @@ public class Flickr extends OAuthSupport {
         this.generator = new FlickrRequestGenerator(apiKey, oauth);
     }
 
-    public EchoManager echo() {
-        return new EchoManager(generator);
+    public GetPhotosResponse call(GetPhotosRequest request) throws IOException {
+        return new RequestManager(generator).call(request, GetPhotosResponse.class);
     }
 
-    public LoginManager login() {
-        return new LoginManager(generator);
+    public GetListResponse call(GetListRequest request) throws IOException {
+        return new RequestManager(generator).call(request, GetListResponse.class);
     }
 
-    public GetListManager interestingness() {
-        return new GetListManager(generator);
+    public EchoResponse call(EchoRequest request) throws IOException {
+        return new RequestManager(generator).call(request, EchoResponse.class);
     }
 
-    public GetPhotosManager photos() {
-        return new GetPhotosManager(generator);
+    public LoginResponse call(LoginRequest request) throws IOException {
+        return new RequestManager(generator).call(request, LoginResponse.class);
     }
+
 }

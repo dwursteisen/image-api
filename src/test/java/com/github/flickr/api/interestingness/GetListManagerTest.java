@@ -28,7 +28,7 @@ public class GetListManagerTest {
     @Test
     public void can_call_flickr() throws IOException {
         GetListRequest request = new GetListRequest();
-        GetListResponse response = flickr.interestingness().call(request);
+        GetListResponse response = flickr.call(request);
         assertEquals("ok", response.getStat());
         assertEquals(1, response.getPage());
         assertEquals(response.getPerPage(), response.getPhotos().size());
@@ -38,7 +38,7 @@ public class GetListManagerTest {
     public void can_call_flickr_with_parameters() throws IOException {
         GetListRequest request = new GetListRequest();
         request.setPage(5);
-        GetListResponse response = flickr.interestingness().call(request);
+        GetListResponse response = flickr.call(request);
         assertEquals("ok", response.getStat());
         assertEquals(5, response.getPage());
     }
@@ -47,7 +47,7 @@ public class GetListManagerTest {
     public void can_call_flickr_with_extras() throws IOException {
         GetListRequest request = new GetListRequest();
         request.addExtras(Extras.UrlMedium);
-        GetListResponse response = flickr.interestingness().call(request);
+        GetListResponse response = flickr.call(request);
         assertNotNull(response.getPhotos().get(0).getUrlMedium());
 
     }
@@ -55,7 +55,7 @@ public class GetListManagerTest {
     @Test(expected = IllegalArgumentException.class)
     public void can_call_flickr_with_missing_extras() throws IOException {
         GetListRequest request = new GetListRequest();
-        GetListResponse response = flickr.interestingness().call(request);
+        GetListResponse response = flickr.call(request);
         assertNotNull(response.getPhotos().get(0).getUrlMedium());
     }
 

@@ -16,8 +16,8 @@
 
 package com.github.imgur.api;
 
+import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
-import com.github.imgur.api.upload.UploadManager;
 import com.github.imgur.api.upload.UploadRequest;
 import com.github.imgur.api.upload.UploadResponse;
 import org.apache.commons.io.FileUtils;
@@ -34,11 +34,11 @@ import static org.junit.Assert.*;
 
 public class UploadRequestTest {
 
-    private static UploadManager uploadManager;
+    private static ImgUr imgur;
 
     @BeforeClass
     public static void setUpClass() {
-        uploadManager = new ImgUrBuilder().withAnonymousKey().build().upload();
+        imgur = new ImgUrBuilder().withAnonymousKey().build();
     }
 
     @Test
@@ -119,7 +119,7 @@ public class UploadRequestTest {
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withImageUrl(imageUrl).build();
 
-        UploadResponse response = uploadManager.call(request);
+        UploadResponse response = imgur.call(request);
         assertNotNull(response.getLinks());
     }
 
@@ -130,7 +130,7 @@ public class UploadRequestTest {
         UploadRequest.Builder builder = new UploadRequest.Builder();
 
         UploadRequest request = builder.withImageFile(image).build();
-        UploadResponse response = uploadManager.call(request);
+        UploadResponse response = imgur.call(request);
         assertNotNull(response.getLinks());
 
         System.err.println("...just upload an image that you will find on the url : ");

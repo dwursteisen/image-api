@@ -1,7 +1,5 @@
 package com.github.imgur;
 
-import com.github.imgur.api.account.AccountRequest;
-import com.github.imgur.api.account.AccountResponse;
 import com.github.imgur.api.upload.UploadRequest;
 import com.github.imgur.api.upload.UploadResponse;
 import org.scribe.model.Token;
@@ -66,9 +64,9 @@ public class ImgurTester {
 
                     UploadRequest.Builder builder = new UploadRequest.Builder();
                     UploadRequest request = builder.withImageUrl(imageUrl)
-                                            .withAccessToken(accessToken).build();
+                            .withAccessToken(accessToken).build();
 
-                    UploadResponse r = imgur.upload().call(request);
+                    UploadResponse r = imgur.call(request);
 
                     response.setText(r.toString());
                 } catch (IOException e1) {

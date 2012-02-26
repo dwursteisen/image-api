@@ -21,19 +21,17 @@ import org.scribe.model.OAuthRequest;
 
 import java.io.IOException;
 
-public class RequestManager<REQUEST extends Request, RESPONSE extends Response> {
+public class RequestManager {
 
-    private final Class<RESPONSE> clazz;
     private final Gson gson = new Gson();
-    private final ProviderRequestGenerator<Request> provider;
+    private final ProviderRequestGenerator provider;
 
-    public RequestManager(Class<RESPONSE> clazz, ProviderRequestGenerator<Request> provider) {
-        this.clazz = clazz;
+    public RequestManager(ProviderRequestGenerator provider) {
         this.provider = provider;
     }
 
 
-    public RESPONSE call(REQUEST request) throws IOException {
+    public <RESPONSE> RESPONSE call(Request request, Class<RESPONSE> clazz) throws IOException {
 
         OAuthRequest httpRequest = provider.createHttpRequest(request);
         provider.addRequestParameters(httpRequest, request);
@@ -46,7 +44,7 @@ public class RequestManager<REQUEST extends Request, RESPONSE extends Response> 
         String responseBody = response.getBody();
         if (!response.isSuccessful()) {
             throw new IOException("Oups ! Problem occur with your request " + request
-                                  + " ! The called webservice respond with " + responseBody);
+                    + " ! The called webservice respond with " + responseBody);
         }
         String json = provider.validateResponse(responseBody);
         return gson.fromJson(json, clazz);

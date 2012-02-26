@@ -1,6 +1,7 @@
 package com.github.flickr;
 
 import com.github.commons.ProviderRequestGenerator;
+import com.github.commons.Request;
 import com.github.flickr.api.commons.FlickrRequest;
 import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
@@ -10,7 +11,7 @@ import org.scribe.oauth.OAuthService;
 
 import java.util.Map;
 
-public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRequest> {
+public class FlickrRequestGenerator implements ProviderRequestGenerator {
 
 
     private final static Logger LOG = Logger.getLogger(FlickrRequestGenerator.class);
@@ -30,12 +31,12 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRe
     }
 
     @Override
-    public OAuthRequest createHttpRequest(FlickrRequest request) {
+    public OAuthRequest createHttpRequest(Request request) {
         return new OAuthRequest(Verb.GET, FLICKR_BASE_URL);
     }
 
     @Override
-    public void addRequestParameters(OAuthRequest httpRequest, FlickrRequest request) {
+    public void addRequestParameters(OAuthRequest httpRequest, Request request) {
         Map<String, Object> params = request.buildParameters();
 
         for (Map.Entry<String, Object> p : params.entrySet()) {
@@ -56,14 +57,15 @@ public class FlickrRequestGenerator implements ProviderRequestGenerator<FlickrRe
     }
 
     @Override
-    public void signRequest(OAuthRequest httpRequest, FlickrRequest request) {
+    public void signRequest(OAuthRequest httpRequest, Request r) {
+        FlickrRequest request = (FlickrRequest) r;
         Token accessToken = request.getAccessToken();
         if (accessToken == null && request.isOAuth()) {
             throw new IllegalArgumentException("Oups ! You try to access to an resource "
-                                               + "which need authentication, "
-                                               + "and you haven't set an "
-                                               + "access token on your request " + request + ". "
-                                               + "Please set this token and retry.");
+                    + "which need authentication, "
+                    + "and you haven't set an "
+                    + "access token on your request " + request + ". "
+                    + "Please set this token and retry.");
         }
         oauth.signRequest(accessToken, httpRequest);
     }

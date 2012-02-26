@@ -13,18 +13,15 @@ import static org.junit.Assert.assertNotNull;
 public class EchoManagerTest {
 
     private Flickr flickr;
-    private EchoManager echoManager;
-
 
     @Before
     public void setUp() throws IOException {
         flickr = new FlickrBuilder().withApiKey().build();
-        echoManager = flickr.echo();
     }
 
     @Test
     public void can_call_flickr() throws IOException {
-        EchoResponse response = echoManager.call(new EchoRequest());
+        EchoResponse response = flickr.call(new EchoRequest());
         assertNotNull(response);
         assertEquals("ok", response.getStat());
     }
@@ -33,7 +30,7 @@ public class EchoManagerTest {
     public void can_call_flickr_with_custom_parameter() throws IOException {
         EchoRequest request = new EchoRequest();
         request.setTestParameter("MyFakeParameter");
-        EchoResponse response = echoManager.call(request);
+        EchoResponse response = flickr.call(request);
         assertEquals("MyFakeParameter", response.getTestParameter());
     }
 }
