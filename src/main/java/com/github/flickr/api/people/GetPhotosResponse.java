@@ -1,6 +1,6 @@
 package com.github.flickr.api.people;
 
-import com.github.commons.Response;
+import com.github.flickr.api.commons.FlickrResponse;
 import com.github.flickr.api.model.Photo;
 import com.github.flickr.api.model.Photos;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 26/02/12
  * Time: 15:42
  */
-public class GetPhotosResponse implements Response {
+public class GetPhotosResponse extends FlickrResponse {
     /*
             jsonFlickrApi({"photos":
                 {"page":1,

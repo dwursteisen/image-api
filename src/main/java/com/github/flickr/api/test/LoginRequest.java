@@ -1,13 +1,16 @@
 package com.github.flickr.api.test;
 
+import com.github.commons.Response;
+import com.github.flickr.Flickr;
 import com.github.flickr.api.commons.FlickrRequest;
 import org.scribe.model.Token;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends FlickrRequest {
-    
+
     public LoginRequest(Token accessToken) {
         setAccessToken(accessToken);
     }
@@ -22,5 +25,10 @@ public class LoginRequest extends FlickrRequest {
     @Override
     public boolean isOAuth() {
         return true;
+    }
+
+    @Override
+    public Response call(Flickr flickr) throws IOException {
+        return flickr.call(this);
     }
 }

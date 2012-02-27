@@ -16,11 +16,11 @@
 
 package com.github.imgur.api.image;
 
-import com.github.commons.Response;
+import com.github.imgur.api.commons.ImgurResponse;
 import com.google.gson.annotations.SerializedName;
 
 
-public class ImageResponse implements Response {
+public class ImageResponse extends ImgurResponse {
     /*
     {
     "image": {

@@ -16,10 +16,10 @@
 
 package com.github.imgur.api.upload;
 
-import com.github.commons.Response;
+import com.github.imgur.api.commons.ImgurResponse;
 import com.google.gson.annotations.SerializedName;
 
-public class UploadResponse implements Response {
+public class UploadResponse extends ImgurResponse {
     /*
     {
     "upload": {
@@ -166,6 +166,6 @@ public class UploadResponse implements Response {
 
     @Override
     public String toString() {
-        return "{upload : delete links "+getLinks().getDeletePage() + " }";
+        return "{upload : delete links " + getLinks().getDeletePage() + " }";
     }
 }

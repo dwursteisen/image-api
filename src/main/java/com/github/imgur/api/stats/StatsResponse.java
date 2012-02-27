@@ -17,7 +17,7 @@
 
 package com.github.imgur.api.stats;
 
-import com.github.commons.Response;
+import com.github.imgur.api.commons.ImgurResponse;
 import com.google.gson.annotations.SerializedName;
 
 /*
@@ -32,7 +32,7 @@ import com.google.gson.annotations.SerializedName;
 }
 */
 
-public class StatsResponse implements Response {
+public class StatsResponse extends ImgurResponse {
 
 
     static private class Stats {

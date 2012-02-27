@@ -1,7 +1,10 @@
 package com.github.flickr.api.test;
 
+import com.github.commons.Response;
+import com.github.flickr.Flickr;
 import com.github.flickr.api.commons.FlickrRequest;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,5 +28,10 @@ public class EchoRequest extends FlickrRequest {
 
     public void setTestParameter(String testParameter) {
         this.testParameter = testParameter;
+    }
+
+    @Override
+    public Response call(Flickr flickr) throws IOException {
+        return flickr.call(this);
     }
 }

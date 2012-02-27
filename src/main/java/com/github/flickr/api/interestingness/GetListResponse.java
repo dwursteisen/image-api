@@ -1,6 +1,6 @@
 package com.github.flickr.api.interestingness;
 
-import com.github.commons.Response;
+import com.github.flickr.api.commons.FlickrResponse;
 import com.github.flickr.api.model.Photo;
 import com.github.flickr.api.model.Photos;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 18/02/12
  * Time: 14:20
  */
-public class GetListResponse implements Response {
+public class GetListResponse extends FlickrResponse {
     /*
     jsonFlickrApi({
         "photos":{
@@ -63,4 +63,5 @@ public class GetListResponse implements Response {
     public List<Photo> getPhotos() {
         return new ArrayList<Photo>(photos.getPhoto());
     }
+
 }

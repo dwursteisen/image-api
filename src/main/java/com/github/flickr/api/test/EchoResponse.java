@@ -1,9 +1,9 @@
 package com.github.flickr.api.test;
 
-import com.github.commons.Response;
 import com.github.flickr.api.commons.FlickrContent;
+import com.github.flickr.api.commons.FlickrResponse;
 
-public class EchoResponse implements Response {
+public class EchoResponse extends FlickrResponse {
 
 
     /**

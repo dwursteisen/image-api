@@ -31,7 +31,7 @@ public class RequestManager {
     }
 
 
-    public <RESPONSE> RESPONSE call(Request request, Class<RESPONSE> clazz) throws IOException {
+    public <RESPONSE extends Response> RESPONSE call(Request request, Class<RESPONSE> clazz) throws IOException {
 
         OAuthRequest httpRequest = provider.createHttpRequest(request);
         provider.addRequestParameters(httpRequest, request);
@@ -47,7 +47,9 @@ public class RequestManager {
                     + " ! The called webservice respond with " + responseBody);
         }
         String json = provider.validateResponse(responseBody);
-        return gson.fromJson(json, clazz);
+        RESPONSE responseObject = gson.fromJson(json, clazz);
+        responseObject.setRawResponse(json);
+        return responseObject;
 
     }
 

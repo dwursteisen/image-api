@@ -1,13 +1,13 @@
 package com.github.imgur.api.account;
 
-import com.github.commons.Response;
+import com.github.imgur.api.commons.ImgurResponse;
 
 /**
  * User: Wursteisen David
  * Date: 24/02/12
  * Time: 22:30
  */
-public class AccountResponse implements Response {
+public class AccountResponse extends ImgurResponse {
     /*
     {
         "account": {
@@ -23,12 +23,24 @@ public class AccountResponse implements Response {
         private String default_album_privacy;
         private boolean public_images;
     }
-    
+
     private Account account;
-    public String getUrl() { return account.url; }        
-    public boolean isPro() { return account.is_pro; }
-    public String getDefaultAlbumPrivacy() { return account.default_album_privacy; }
-    public boolean isPublicImages() { return account.public_images; }
+
+    public String getUrl() {
+        return account.url;
+    }
+
+    public boolean isPro() {
+        return account.is_pro;
+    }
+
+    public String getDefaultAlbumPrivacy() {
+        return account.default_album_privacy;
+    }
+
+    public boolean isPublicImages() {
+        return account.public_images;
+    }
 
     @Override
     public String toString() {

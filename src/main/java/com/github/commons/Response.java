@@ -14,5 +14,5 @@ package com.github.commons;
 
 
 public interface Response {
-
+    public void setRawResponse(String rawResponse);
 }

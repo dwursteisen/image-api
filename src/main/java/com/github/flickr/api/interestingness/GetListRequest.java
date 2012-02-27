@@ -1,9 +1,16 @@
 package com.github.flickr.api.interestingness;
 
+import com.github.commons.Response;
+import com.github.flickr.Flickr;
 import com.github.flickr.api.commons.Extras;
 import com.github.flickr.api.commons.FlickrRequest;
 
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: Wursteisen David
@@ -65,5 +72,10 @@ public class GetListRequest extends FlickrRequest {
 
     public void setPage(Integer page) {
         this.page = page;
+    }
+
+    @Override
+    public Response call(Flickr flickr) throws IOException {
+        return flickr.call(this);
     }
 }

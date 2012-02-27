@@ -1,9 +1,9 @@
 package com.github.flickr.api.test;
 
-import com.github.commons.Response;
 import com.github.flickr.api.commons.FlickrContent;
+import com.github.flickr.api.commons.FlickrResponse;
 
-public class LoginResponse implements Response {
+public class LoginResponse extends FlickrResponse {
 
     /*
             jsonFlickrApi({
@@ -43,7 +43,7 @@ public class LoginResponse implements Response {
     public String toString() {
         return "LoginResponse{" +
                 "stat='" + stat + '\'' +
-                ", user=" + getUserId() + ' ' +getUsername() +
+                ", user=" + getUserId() + ' ' + getUsername() +
                 '}';
     }
 }
