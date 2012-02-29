@@ -58,12 +58,10 @@ public class FlickrTester {
         flickrResponse.add(response);
 
         JPanel generator = new JPanel();
-        final JComboBox<Class> combo = new JComboBox<Class>();
-        ComboBoxModel<Class> model = new DefaultComboBoxModel<Class>(
-                getRequestClass()
-        );
+        ComboBoxModel model = new DefaultComboBoxModel(getRequestClass());
 
-        combo.setModel(model);
+        final JComboBox combo = new JComboBox(model);
+
         JButton buttonGenerate = new JButton("Generate");
         buttonGenerate.addActionListener(new ActionListener() {
             @Override
