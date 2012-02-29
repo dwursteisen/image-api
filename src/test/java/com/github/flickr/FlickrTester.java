@@ -185,11 +185,22 @@ public class FlickrTester {
 
                     Method method = entry.getKey();
                     String text = entry.getValue().getText();
+                    if ("".equals(text.trim())) {
+                        continue;
+                    }
                     Class<?> typeParam = method.getParameterTypes()[0];
                     Object param = text;
                     if (Integer.class.isAssignableFrom(typeParam)) {
                         param = Integer.parseInt(text.trim());
+                    } else if (Enum.class.isAssignableFrom(typeParam)) {
+                        Object[] enumConstants = typeParam.getEnumConstants();
+                        for (Object enumConstant : enumConstants) {
+                            if (text.equals(enumConstant.toString())) {
+                                param = enumConstant;
+                            }
+                        }
                     }
+
                     try {
                         method.invoke(r, param);
                     } catch (IllegalAccessException e1) {

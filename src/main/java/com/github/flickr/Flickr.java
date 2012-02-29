@@ -59,4 +59,12 @@ public class Flickr extends OAuthSupport {
     public NullResponse call(NullRequest nullRequest) throws IOException {
         return new RequestManager(generator).call(nullRequest, NullResponse.class);
     }
+
+    public com.github.flickr.api.panda.GetListResponse call(com.github.flickr.api.panda.GetListRequest request) throws IOException {
+        return new RequestManager(generator).call(request, com.github.flickr.api.panda.GetListResponse.class);
+    }
+
+    public com.github.flickr.api.panda.GetPhotosResponse call(com.github.flickr.api.panda.GetPhotosRequest request) throws IOException {
+        return new RequestManager(generator).call(request, com.github.flickr.api.panda.GetPhotosResponse.class);
+    }
 }
