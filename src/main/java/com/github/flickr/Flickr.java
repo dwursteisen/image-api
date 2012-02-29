@@ -11,6 +11,8 @@ import com.github.flickr.api.test.EchoRequest;
 import com.github.flickr.api.test.EchoResponse;
 import com.github.flickr.api.test.LoginRequest;
 import com.github.flickr.api.test.LoginResponse;
+import com.github.flickr.api.test.NullRequest;
+import com.github.flickr.api.test.NullResponse;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.FlickrApi;
 import org.scribe.oauth.OAuthService;
@@ -54,4 +56,7 @@ public class Flickr extends OAuthSupport {
         return new RequestManager(generator).call(request, LoginResponse.class);
     }
 
+    public NullResponse call(NullRequest nullRequest) throws IOException {
+        return new RequestManager(generator).call(nullRequest, NullResponse.class);
+    }
 }

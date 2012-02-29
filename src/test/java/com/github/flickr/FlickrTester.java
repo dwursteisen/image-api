@@ -2,9 +2,6 @@ package com.github.flickr;
 
 import com.github.commons.Response;
 import com.github.flickr.api.commons.FlickrRequest;
-import com.github.flickr.api.interestingness.GetListRequest;
-import com.github.flickr.api.people.GetPhotosRequest;
-import com.github.flickr.api.test.EchoRequest;
 import com.github.flickr.api.test.LoginRequest;
 import com.github.flickr.api.test.LoginResponse;
 import org.scribe.model.Token;
@@ -13,13 +10,19 @@ import org.scribe.model.Verifier;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,11 +60,7 @@ public class FlickrTester {
         JPanel generator = new JPanel();
         final JComboBox<Class> combo = new JComboBox<Class>();
         ComboBoxModel<Class> model = new DefaultComboBoxModel<Class>(
-                new Class[]{EchoRequest.class,
-                        LoginRequest.class,
-                        GetListRequest.class,
-                        GetPhotosRequest.class
-                }
+                getRequestClass()
         );
 
         combo.setModel(model);
@@ -112,6 +111,27 @@ public class FlickrTester {
         mainFrame.setSize(800, 200);
         mainFrame.setVisible(true);
 
+    }
+
+    private Class[] getRequestClass() {
+
+        List<Class> result = new ArrayList<Class>();
+        try {
+            Class[] classes = getClasses("com.github.flickr.api");
+            for (Class aClass : classes) {
+
+                if (FlickrRequest.class.isAssignableFrom(aClass)) {
+                    result.add(aClass);
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        result.remove(FlickrRequest.class);
+        return result.toArray(new Class[result.size()]);
     }
 
     public void createRequestFrame(final Class<? extends FlickrRequest> request) {
@@ -215,5 +235,60 @@ public class FlickrTester {
             // oups !
             return null;
         }
+    }
+
+    /**
+     * Scans all classes accessible from the context class loader which belong to the given package and subpackages.
+     *
+     * @param packageName The base package
+     * @return The classes
+     * @throws ClassNotFoundException
+     * @throws java.io.IOException
+     */
+    static Class[] getClasses(String packageName)
+            throws ClassNotFoundException, IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        assert classLoader != null;
+        String path = packageName.replace('.', '/');
+        Enumeration<URL> resources = classLoader.getResources(path);
+        List<File> dirs = new ArrayList<File>();
+        while (resources.hasMoreElements()) {
+            URL resource = resources.nextElement();
+            try {
+                dirs.add(new File(resource.toURI()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        ArrayList<Class> classes = new ArrayList<Class>();
+        for (File directory : dirs) {
+            classes.addAll(findClasses(directory, packageName));
+        }
+        return classes.toArray(new Class[classes.size()]);
+    }
+
+    /**
+     * Recursive method used to find all classes in a given directory and subdirs.
+     *
+     * @param directory   The base directory
+     * @param packageName The package name for classes found inside the base directory
+     * @return The classes
+     * @throws ClassNotFoundException
+     */
+    static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
+        List<Class> classes = new ArrayList<Class>();
+        if (!directory.exists()) {
+            return classes;
+        }
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            if (file.isDirectory()) {
+                assert !file.getName().contains(".");
+                classes.addAll(findClasses(file, packageName + "." + file.getName()));
+            } else if (file.getName().endsWith(".class")) {
+                classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
+            }
+        }
+        return classes;
     }
 }
