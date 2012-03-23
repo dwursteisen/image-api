@@ -23,6 +23,7 @@ import java.io.IOException;
  */
 public class ImgUr extends OAuthSupport {
     private final ImgUrRequestGenerator requestGenerator;
+    private final RequestManager requestManager;
 
 
     public ImgUr(String apiKey) {
@@ -32,6 +33,7 @@ public class ImgUr extends OAuthSupport {
     public ImgUr(String apiKey, OAuthService oauth) {
         super(oauth);
         requestGenerator = new ImgUrRequestGenerator(apiKey, oauth);
+        requestManager = new RequestManager(requestGenerator);
     }
 
     public ImgUr(String apiKey, String secret) {
@@ -42,19 +44,19 @@ public class ImgUr extends OAuthSupport {
     }
 
     public AccountResponse call(AccountRequest request) throws IOException {
-        return new RequestManager(requestGenerator).call(request, AccountResponse.class);
+        return requestManager.call(request, AccountResponse.class);
     }
 
     public ImageResponse call(ImageRequest request) throws IOException {
-        return new RequestManager(requestGenerator).call(request, ImageResponse.class);
+        return requestManager.call(request, ImageResponse.class);
     }
 
     public StatsResponse call(StatsRequest request) throws IOException {
-        return new RequestManager(requestGenerator).call(request, StatsResponse.class);
+        return requestManager.call(request, StatsResponse.class);
     }
 
     public UploadResponse call(UploadRequest request) throws IOException {
-        return new RequestManager(requestGenerator).call(request, UploadResponse.class);
+        return requestManager.call(request, UploadResponse.class);
     }
 
 }
