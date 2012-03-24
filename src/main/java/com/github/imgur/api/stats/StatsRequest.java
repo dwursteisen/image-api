@@ -19,7 +19,6 @@ package com.github.imgur.api.stats;
 import com.github.imgur.api.commons.ImgurRequest;
 import org.scribe.model.Verb;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class StatsRequest extends ImgurRequest {
@@ -30,21 +29,17 @@ public class StatsRequest extends ImgurRequest {
 
     private String view;
 
-    public String getView() {
-        return view;
-    }
-
     public void setView(String view) {
         this.view = view;
     }
 
     public Map<String, Object> buildParameters() {
-        return new HashMap();
+        return emptyParameters();
     }
 
     @Override
     public boolean isOAuth() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override

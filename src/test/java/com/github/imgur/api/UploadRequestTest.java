@@ -42,39 +42,41 @@ public class UploadRequestTest {
     }
 
     @Test
-    public void build() throws IOException {
+    public void can_build_with_title() throws IOException {
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withTitle("title").build();
-        assertEquals("title", request.getTitle());
+        assertEquals("title", request.buildParameters().get("title"));
     }
 
     @Test
-    public void buildImageUrl() throws IOException {
+    public void can_build_with_url_and_title() throws IOException {
         final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
 
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withTitle("title").withImageUrl(imageUrl).build();
-        assertEquals("title", request.getTitle());
-        assertNotNull(request.getImageUrl());
+        Map<String, Object> params = request.buildParameters();
+        assertEquals("http://github.com/images/modules/header/logov3-hover.png", params.get("image").toString());
+        assertEquals("title", params.get("title"));
 
     }
 
 
     @Test
-    public void buildImageFromFile() throws IOException {
+    public void can_build_with_image_file() throws IOException {
 
         final File image = new File("./src/test/resources/uploadme.jpg");
         UploadRequest.Builder builder = new UploadRequest.Builder();
 
         UploadRequest request = builder.withImageFile(image).build();
-        assertNotNull(request.getImageData());
-        assertNull(request.getImageUrl());
+        String imageData = (String) request.buildParameters().get("image");
+        assertNotNull(imageData);
+        assertFalse(imageData.startsWith("http://"));
 
     }
 
 
     @Test
-    public void buildImageFromByteArray() throws IOException {
+    public void can_build_with_byte_array() throws IOException {
 
         final File image = new File("./src/test/resources/uploadme.jpg");
         byte[] array = FileUtils.readFileToByteArray(image);
@@ -82,26 +84,15 @@ public class UploadRequestTest {
         UploadRequest.Builder builder = new UploadRequest.Builder();
 
         UploadRequest request = builder.withImageData(array).build();
-        assertNotNull(request.getImageData());
-        assertNull(request.getImageUrl());
+        String imageData = (String) request.buildParameters().get("image");
+        assertNotNull(imageData);
+        assertFalse(imageData.startsWith("http://"));
+
 
     }
 
-
     @Test
-    public void buildParameters() throws IOException {
-        final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
-
-        UploadRequest.Builder builder = new UploadRequest.Builder();
-        UploadRequest request = builder.withTitle("myTitle").withImageUrl(imageUrl).build();
-
-        Map<String, Object> parameters = request.buildParameters();
-        assertEquals("myTitle", parameters.get("title").toString());
-        assertEquals("http://github.com/images/modules/header/logov3-hover.png", parameters.get("image").toString());
-    }
-
-    @Test
-    public void buildParametersWithoutTitle() throws IOException {
+    public void can_build_with_only_url() throws IOException {
         final URL imageUrl = new URL("http://github.com/images/modules/header/logov3-hover.png");
 
         UploadRequest.Builder builder = new UploadRequest.Builder();

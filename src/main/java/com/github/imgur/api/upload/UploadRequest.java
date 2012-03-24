@@ -37,7 +37,7 @@ public class UploadRequest extends ImgurRequest {
         final Map<String, Object> result = new HashMap<String, Object>();
         if (imageUrl != null) {
             result.put("image", imageUrl);
-        } else {
+        } else if (imageData != null) {
             result.put("image", new String(Base64.encodeBase64(imageData)));
         }
         if (title != null) {
@@ -53,18 +53,6 @@ public class UploadRequest extends ImgurRequest {
         return (getAccessToken() != null);
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public URL getImageUrl() {
-        return imageUrl;
-    }
-
-    public byte[] getImageData() {
-        return imageData;
-    }
-
     @Override
     public String requestUrl(String baseUrl) {
         return baseUrl + "upload.json";
@@ -78,7 +66,7 @@ public class UploadRequest extends ImgurRequest {
         private Token accessToken;
 
         public Builder withImageData(byte[] imageData) {
-            this.imageData = imageData;
+            this.imageData = imageData.clone();
             this.imageUrl = null;
             this.imageFile = null;
             return this;
@@ -106,7 +94,7 @@ public class UploadRequest extends ImgurRequest {
             if (this.imageFile != null) {
                 request.imageData = FileUtils.readFileToByteArray(imageFile);
             }
-            if(accessToken != null) {
+            if (accessToken != null) {
                 request.setAccessToken(accessToken);
             }
             return request;
@@ -116,7 +104,7 @@ public class UploadRequest extends ImgurRequest {
             this.title = title;
             return this;
         }
-        
+
         public Builder withAccessToken(Token accessToken) {
             this.accessToken = accessToken;
             return this;

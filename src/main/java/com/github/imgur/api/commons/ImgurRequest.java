@@ -16,8 +16,6 @@ public abstract class ImgurRequest implements Request {
 
     private Token accessToken;
 
-    private String raw;
-
     public Token getAccessToken() {
         return accessToken;
     }
@@ -36,7 +34,4 @@ public abstract class ImgurRequest implements Request {
         return new HashMap<String, Object>();
     }
 
-    public void setRawResponse(String r) {
-        this.raw = r;
-    }
 }
