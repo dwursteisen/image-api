@@ -16,13 +16,12 @@
 
 package com.github.imgur.api.image;
 
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
-public class ImageRequest extends ImgurRequest {
+public class ImageRequest extends ImgUrRequest {
     private String hash;
 
     public ImageRequest(String hash) {

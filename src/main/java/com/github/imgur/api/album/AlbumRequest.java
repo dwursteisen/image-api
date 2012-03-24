@@ -1,6 +1,6 @@
 package com.github.imgur.api.album;
 
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  * Date: 24/03/12
  * Time: 13:58
  */
-public class AlbumRequest extends ImgurRequest {
+public class AlbumRequest extends ImgUrRequest {
 
     private final String hash;
 

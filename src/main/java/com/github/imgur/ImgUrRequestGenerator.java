@@ -2,7 +2,7 @@ package com.github.imgur;
 
 import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.Request;
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Token;
@@ -31,13 +31,13 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator {
 
     @Override
     public OAuthRequest createHttpRequest(Request r) {
-        ImgurRequest request = (ImgurRequest) r;
+        ImgUrRequest request = (ImgUrRequest) r;
         return new OAuthRequest(request.getVerb(), request.requestUrl(IMGUR_BASE_URL));
     }
 
     @Override
     public void addRequestParameters(OAuthRequest httpRequest, Request r) {
-        ImgurRequest request = (ImgurRequest) r;
+        ImgUrRequest request = (ImgUrRequest) r;
 
         Map<String, Object> params = request.buildParameters();
         Verb verb = request.getVerb();
@@ -68,7 +68,7 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator {
 
     @Override
     public void signRequest(OAuthRequest httpRequest, Request r) {
-        ImgurRequest request = (ImgurRequest) r;
+        ImgUrRequest request = (ImgUrRequest) r;
         Token accessToken = request.getAccessToken();
         if (accessToken == null && request.isOAuth()) {
             throw new IllegalArgumentException("Oups ! You try to access to an resource "

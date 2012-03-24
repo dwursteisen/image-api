@@ -1,9 +1,8 @@
 package com.github.imgur.api.account;
 
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 import org.scribe.model.Token;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Map;
  * Date: 24/02/12
  * Time: 22:27
  */
-public class AccountRequest extends ImgurRequest {
+public class AccountRequest extends ImgUrRequest {
     public AccountRequest(Token accessToken) {
         setAccessToken(accessToken);
     }

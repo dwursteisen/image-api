@@ -1,6 +1,6 @@
 package com.github.imgur.api.album;
 
-import com.github.imgur.api.commons.ImgurResponse;
+import com.github.imgur.api.commons.ImgUrResponse;
 import com.github.imgur.api.model.ImageProperty;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 24/03/12
  * Time: 13:58
  */
-public class AlbumResponse extends ImgurResponse {
+public class AlbumResponse extends ImgUrResponse {
 
     private Album album = new Album();
 

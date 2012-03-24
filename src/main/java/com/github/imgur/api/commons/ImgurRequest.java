@@ -12,7 +12,7 @@ import java.util.Map;
  * Date: 22/02/12
  * Time: 21:43
  */
-public abstract class ImgurRequest implements Request {
+public abstract class ImgUrRequest implements Request {
 
     private Token accessToken;
 

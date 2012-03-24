@@ -16,13 +16,13 @@
 
 package com.github.imgur.api.image;
 
-import com.github.imgur.api.commons.ImgurResponse;
+import com.github.imgur.api.commons.ImgUrResponse;
 import com.github.imgur.api.model.Image;
 import com.github.imgur.api.model.ImageProperty;
 import com.github.imgur.api.model.Links;
 
 
-public class ImageResponse extends ImgurResponse {
+public class ImageResponse extends ImgUrResponse {
 
 
     private ImageProperty images = new ImageProperty();

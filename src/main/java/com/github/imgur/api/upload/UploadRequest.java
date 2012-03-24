@@ -16,7 +16,7 @@
 
 package com.github.imgur.api.upload;
 
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.scribe.model.Token;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class UploadRequest extends ImgurRequest {
+public class UploadRequest extends ImgUrRequest {
     private String title;
     private byte[] imageData;
     private URL imageUrl;

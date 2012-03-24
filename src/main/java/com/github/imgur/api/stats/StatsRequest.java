@@ -16,12 +16,12 @@
 
 package com.github.imgur.api.stats;
 
-import com.github.imgur.api.commons.ImgurRequest;
+import com.github.imgur.api.commons.ImgUrRequest;
 import org.scribe.model.Verb;
 
 import java.util.Map;
 
-public class StatsRequest extends ImgurRequest {
+public class StatsRequest extends ImgUrRequest {
 
     public StatsRequest() {
         throw new RuntimeException("Oups ! This request is no more working on imgur...");

@@ -1,13 +1,13 @@
 package com.github.imgur.api.account;
 
-import com.github.imgur.api.commons.ImgurResponse;
+import com.github.imgur.api.commons.ImgUrResponse;
 
 /**
  * User: Wursteisen David
  * Date: 24/02/12
  * Time: 22:30
  */
-public class AccountResponse extends ImgurResponse {
+public class AccountResponse extends ImgUrResponse {
     /*
     {
         "account": {

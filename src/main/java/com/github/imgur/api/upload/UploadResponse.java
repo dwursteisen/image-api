@@ -16,12 +16,12 @@
 
 package com.github.imgur.api.upload;
 
-import com.github.imgur.api.commons.ImgurResponse;
+import com.github.imgur.api.commons.ImgUrResponse;
 import com.github.imgur.api.model.Image;
 import com.github.imgur.api.model.ImageProperty;
 import com.github.imgur.api.model.Links;
 
-public class UploadResponse extends ImgurResponse {
+public class UploadResponse extends ImgUrResponse {
     /*
     {
     "upload": {
