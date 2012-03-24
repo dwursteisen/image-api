@@ -33,24 +33,38 @@ public class RequestManager {
 
     public <RESPONSE extends Response> RESPONSE call(Request request, Class<RESPONSE> clazz) throws IOException {
 
-        OAuthRequest httpRequest = provider.createHttpRequest(request);
-        provider.addRequestParameters(httpRequest, request);
-
-        if (request.isOAuth()) {
-            provider.signRequest(httpRequest, request);
-        }
-        org.scribe.model.Response response = httpRequest.send();
+        org.scribe.model.Response response = performHttpRequest(request);
 
         String responseBody = response.getBody();
         if (!response.isSuccessful()) {
             throw new IOException("Oups ! Problem occur with your request " + request
                     + " ! The called webservice respond with " + responseBody);
         }
-        String json = provider.validateResponse(responseBody);
-        RESPONSE responseObject = gson.fromJson(json, clazz);
-        responseObject.setRawResponse(json);
+        RESPONSE responseObject = createObjectReponse(responseBody, clazz);
         return responseObject;
 
+    }
+
+    <RESPONSE extends Response> RESPONSE createObjectReponse(String responseBody, Class<RESPONSE> clazz) throws IOException {
+        String json = provider.validateResponse(responseBody);
+        RESPONSE responseObject = gson.fromJson(json, clazz);
+        if (responseObject == null) {
+            throw new IOException("Oups ! Unable to desezialize response " + responseBody
+                    + " from your request. Check the validity of your request !");
+
+        }
+        responseObject.setRawResponse(json);
+        return responseObject;
+    }
+
+    org.scribe.model.Response performHttpRequest(Request request) {
+        OAuthRequest httpRequest = provider.createHttpRequest(request);
+        provider.addRequestParameters(httpRequest, request);
+
+        if (request.isOAuth()) {
+            provider.signRequest(httpRequest, request);
+        }
+        return httpRequest.send();
     }
 
 

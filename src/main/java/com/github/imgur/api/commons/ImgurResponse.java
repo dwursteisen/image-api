@@ -7,7 +7,7 @@ import com.github.commons.Response;
  * Date: 27/02/12
  * Time: 23:20
  */
-public abstract class ImgurResponse implements Response {
+public abstract class ImgUrResponse implements Response {
     private String raw;
 
     @Override
