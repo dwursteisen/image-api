@@ -17,133 +17,22 @@
 package com.github.imgur.api.image;
 
 import com.github.imgur.api.commons.ImgurResponse;
-import com.google.gson.annotations.SerializedName;
+import com.github.imgur.api.model.Image;
+import com.github.imgur.api.model.ImageProperty;
+import com.github.imgur.api.model.Links;
 
 
 public class ImageResponse extends ImgurResponse {
-    /*
-    {
-    "image": {
-        "image": {
-            "title": null,
-            "caption": null,
-            "hash": "yPdcE",
-            "datetime": "2010-08-16 20:13:27",
-            "type": "image\/gif",
-            "animated": "false",
-            "width": 314,
-            "height": 115,
-            "size": 4413,
-            "views": 0,
-            "bandwidth": 0
-        },
-        "links": {
-            "original": "http:\/\/imgur.com\/yPdcE.gif",
-            "imgur_page": "http:\/\/imgur.com\/yPdcE",
-            "small_square": "http:\/\/imgur.com\/yPdcEs.jpg",
-            "large_thumbnail": "http:\/\/imgur.com\/yPdcEl.jpg"
-        }
-    }
-}
-*/
-    static private class Image {
-        private ImageProperty image;
-        private Links links;
-    }
-
-    static public class ImageProperty {
-        private String title;
-        private String caption;
-        private String hash;
-        private String datetime;
-        private String type;
-        private boolean animated;
-        private int width;
-        private int height;
-        private long size;
-        private long views;
-        private long bandwidth;
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getCaption() {
-            return caption;
-        }
-
-        public String getHash() {
-            return hash;
-        }
-
-        public String getDatetime() {
-            return datetime;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public boolean isAnimated() {
-            return animated;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public long getSize() {
-            return size;
-        }
-
-        public long getViews() {
-            return views;
-        }
-
-        public long getBandwidth() {
-            return bandwidth;
-        }
-    }
-
-    static public class Links {
-        private String original;
-        @SerializedName("imgur_page")
-        private String imgurPage;
-        @SerializedName("small_square")
-        private String smallSquare;
-        @SerializedName("lage_thumbnail")
-        private String largeThumbnail;
-
-        public String getOriginal() {
-            return original;
-        }
-
-        public String getImgurPage() {
-            return imgurPage;
-        }
-
-        public String getSmallSquare() {
-            return smallSquare;
-        }
-
-        public String getLargeThumbnail() {
-            return largeThumbnail;
-        }
-    }
 
 
-    private Image image = new Image();
+    private ImageProperty images = new ImageProperty();
 
     public Links getLinks() {
-        return image.links;
+        return images.getLinks();
     }
 
-    public ImageProperty getImageProperty() {
-        return image.image;
+    public Image getImage() {
+        return images.getImage();
     }
 
 }

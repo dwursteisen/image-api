@@ -17,7 +17,9 @@
 package com.github.imgur.api.upload;
 
 import com.github.imgur.api.commons.ImgurResponse;
-import com.google.gson.annotations.SerializedName;
+import com.github.imgur.api.model.Image;
+import com.github.imgur.api.model.ImageProperty;
+import com.github.imgur.api.model.Links;
 
 public class UploadResponse extends ImgurResponse {
     /*
@@ -49,119 +51,14 @@ public class UploadResponse extends ImgurResponse {
 }
      */
 
-    private Upload upload = new Upload();
+    private ImageProperty upload = new ImageProperty();
 
     public Links getLinks() {
-        return upload.links;
+        return upload.getLinks();
     }
 
     public Image getImage() {
-        return upload.image;
-    }
-
-    static private class Upload {
-        private Links links;
-        private Image image;
-    }
-
-    static public class Image {
-        private boolean name;
-        private String title;
-        private String caption;
-        private String hash;
-        private String deleteHash;
-        private String datetime;
-        private String type;
-        private String animated;
-        private int width;
-        private int height;
-        private int size;
-        private int view;
-        private int bandwidth;
-
-        public boolean isName() {
-            return name;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getCaption() {
-            return caption;
-        }
-
-        public String getHash() {
-            return hash;
-        }
-
-        public String getDeleteHash() {
-            return deleteHash;
-        }
-
-        public String getDatetime() {
-            return datetime;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public String getAnimated() {
-            return animated;
-        }
-
-        public int getWidth() {
-            return width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public int getView() {
-            return view;
-        }
-
-        public int getBandwidth() {
-            return bandwidth;
-        }
-    }
-
-    static public class Links {
-        private String original;
-        @SerializedName("imgur_page")
-        private String imgurPage;
-        @SerializedName("delete_page")
-        private String deletePage;
-        @SerializedName("small_square")
-        private String smallSquare;
-        @SerializedName("large_thumbnail")
-        private String largeThumbnail;
-
-        public String getOriginal() {
-            return original;
-        }
-
-        public String getImgurPage() {
-            return imgurPage;
-        }
-
-        public String getDeletePage() {
-            return deletePage;
-        }
-
-        public String getSmallSquare() {
-            return smallSquare;
-        }
-
-        public String getLargeThumbnail() {
-            return largeThumbnail;
-        }
+        return upload.getImage();
     }
 
     @Override

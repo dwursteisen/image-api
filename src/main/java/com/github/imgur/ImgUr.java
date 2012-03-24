@@ -4,6 +4,8 @@ import com.github.commons.OAuthSupport;
 import com.github.commons.RequestManager;
 import com.github.imgur.api.account.AccountRequest;
 import com.github.imgur.api.account.AccountResponse;
+import com.github.imgur.api.album.AlbumRequest;
+import com.github.imgur.api.album.AlbumResponse;
 import com.github.imgur.api.image.ImageRequest;
 import com.github.imgur.api.image.ImageResponse;
 import com.github.imgur.api.stats.StatsRequest;
@@ -57,6 +59,10 @@ public class ImgUr extends OAuthSupport {
 
     public UploadResponse call(UploadRequest request) throws IOException {
         return requestManager.call(request, UploadResponse.class);
+    }
+
+    public AlbumResponse call(AlbumRequest request) throws IOException {
+        return requestManager.call(request, AlbumResponse.class);
     }
 
 }

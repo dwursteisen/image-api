@@ -51,7 +51,7 @@ public class ImageManagerTest {
     @Test
     public void can_deserialize_imgur_response() {
         ImageResponse response = new Gson().fromJson(imgUrResponse, ImageResponse.class);
-        assertEquals(408360, response.getImageProperty().getViews());
+        assertEquals(408360, response.getImage().getViews());
     }
 
     @Test
@@ -59,8 +59,8 @@ public class ImageManagerTest {
         final String hash = "ABktn";
         ImageResponse result = imgur.call(new ImageRequest(hash));
 
-        assertNotNull(result.getImageProperty());
-        assertEquals("2010-08-31 12:10:40", result.getImageProperty().getDatetime());
+        assertNotNull(result.getImage());
+        assertEquals("2010-08-31 12:10:40", result.getImage().getDatetime());
     }
 
     @Test(expected = IOException.class)
