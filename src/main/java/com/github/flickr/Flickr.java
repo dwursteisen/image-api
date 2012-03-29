@@ -7,6 +7,8 @@ import com.github.flickr.api.interestingness.GetListRequest;
 import com.github.flickr.api.interestingness.GetListResponse;
 import com.github.flickr.api.people.GetPhotosRequest;
 import com.github.flickr.api.people.GetPhotosResponse;
+import com.github.flickr.api.photos.licenses.GetInfoRequest;
+import com.github.flickr.api.photos.licenses.GetInfoResponse;
 import com.github.flickr.api.test.*;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.FlickrApi;
@@ -63,5 +65,9 @@ public class Flickr extends OAuthSupport {
 
     public com.github.flickr.api.panda.GetPhotosResponse call(com.github.flickr.api.panda.GetPhotosRequest request) throws IOException {
         return requestManager.call(request, com.github.flickr.api.panda.GetPhotosResponse.class);
+    }
+
+    public GetInfoResponse call(GetInfoRequest getInfoRequest) throws IOException {
+        return requestManager.call(getInfoRequest, GetInfoResponse.class);
     }
 }
