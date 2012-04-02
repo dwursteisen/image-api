@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Image-api : an easy-to-use java library for Imgur API webservice and flickr api webservice. And all of this with OAuth support !" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Image-api</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/dwursteisen/imgur-API">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Image-api</h1>
+          <h2 id="project_tagline">an easy-to-use java library for Imgur API webservice and flickr api webservice. And all of this with OAuth support !</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/dwursteisen/imgur-API/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/dwursteisen/imgur-API/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Image Api</h1>
+
+<h2>What is the main purpose of this library ?</h2>
+
+<p>Image API is here to provide an easy access to image web service like imgur, flickr, etc.
+You'll be able to get data from webservice, as you'll be able to push data like your last picture, ...</p>
+
+<h2>What image web service is now supported ?</h2>
+
+<p>Today, you can make request for: <a href="http://api.imgur.com/">imgur</a> and <a href="http://www.flickr.com/services/api/">flickr</a></p>
+
+<h2>How to use it ?</h2>
+
+<p>Add Image API into your classpath, then simply create the service object of your need (img ur, flickr, ...)
+as the example just bellow</p>
+
+<h3>With Flickr</h3>
+
+<div class="highlight">
+<pre><span class="n">Flickr</span> <span class="n">flickrProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Flickr</span><span class="o">(</span><span class="s">"YOUR API KEY"</span><span class="o">,</span> <span class="s">"YOUR API SECRET"</span><span class="o">);</span>
+</pre>
+</div>
+
+
+<p>Then, just call  Flickr with a request, and you'll get a response !</p>
+
+<div class="highlight">
+<pre><span class="n">flickrProvider</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="k">new</span> <span class="n">EchoRequest</span><span class="o">());</span>
+</pre>
+</div>
+
+
+<p>If your request need parameters, just configure it with the request (ie : myRequest.setMyParameter());</p>
+
+<div class="highlight">
+<pre><span class="n">EchoRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EchoRequest</span><span class="o">();</span>
+<span class="n">request</span><span class="o">.</span><span class="na">setTestParameter</span><span class="o">(</span><span class="s">"My Test Parameter"</span><span class="o">);</span>
+<span class="n">EchoResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">flickrProvider</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+</pre>
+</div>
+
+
+<p>The response will represent the response from the web service.
+So, for this <a href="http://www.flickr.com/services/api/flickr.test.echo.html">echo method</a>, you'll be able to check
+the flickr status with the stat field.</p>
+
+<div class="highlight">
+<pre><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">getStat</span><span class="o">());</span> <span class="c1">// will print ok</span>
+</pre>
+</div>
+
+
+<h3>With ImgUr</h3>
+
+<p>If you want to use the anonymous api:</p>
+
+<div class="highlight">
+<pre><span class="n">ImgUr</span> <span class="n">imgurProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ImgUr</span><span class="o">(</span><span class="s">"YOUR ANONYMOUS API KEY"</span><span class="o">);</span>
+</pre>
+</div>
+
+
+<p>If you want to use the authenticated api (with oauth):</p>
+
+<div class="highlight">
+<pre><span class="n">ImgUr</span> <span class="n">imgurProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ImgUr</span><span class="o">(</span><span class="s">"YOUR API KEY"</span><span class="o">,</span> <span class="s">"YOUR API SECRET"</span><span class="o">);</span>
+</pre>
+</div>
+
+
+<p>then you can call imgur like this :</p>
+
+<div class="highlight">
+<pre><span class="n">ImageResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">imgurProvider</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="k">new</span> <span class="n">ImageRequest</span><span class="o">(</span><span class="s">"An imgur image hashcode"</span><span class="o">));</span>
+</pre>
+</div>
+
+
+<p>or like this for an authenticated resources :</p>
+
+<div class="highlight">
+<pre><span class="n">AccountResponse</span> <span class="o">=</span> <span class="n">imgurProvider</span><span class="o">.</span><span class="na">call</span><span class="o">(</span><span class="k">new</span> <span class="n">AccountRequest</span><span class="o">(</span><span class="n">yourAccessToken</span><span class="o">));</span>
+</pre>
+</div>
+
+
+<h2>How to use the authentication based on oauth ?</h2>
+
+<p>Image api use <a href="https://github.com/fernandezpablo85/scribe-java">scribe</a> for oauth support.
+Just call methods on your provider as the <a href="http://www.flickr.com/services/api/auth.oauth.html">oauth protocol</a> describe it.
+You haven't need to create any OAuthService as seen in <a href="https://github.com/fernandezpablo85/scribe-java">scribe</a> documention, Image api will do it for you !</p>
+
+<div class="highlight">
+<pre><span class="n">Token</span> <span class="n">requestToken</span> <span class="o">=</span> <span class="n">imgur</span><span class="o">.</span><span class="na">getRequestToken</span><span class="o">();</span>
+<span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="n">imgur</span><span class="o">.</span><span class="na">getAuthorizationUrl</span><span class="o">(</span><span class="n">requestToken</span><span class="o">);</span> <span class="c1">// redirect your user on this url</span>
+<span class="cm">/* [...] */</span>
+<span class="n">Verifier</span> <span class="n">verifier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Verifier</span><span class="o">(</span><span class="n">userCode</span><span class="o">);</span> <span class="c1">// code given by imgur</span>
+<span class="n">Token</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">imgur</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">(</span><span class="n">requestToken</span><span class="o">,</span> <span class="n">verifier</span><span class="o">);</span> <span class="c1">// use this token with authenticated request</span>
+</pre>
+</div>
+
+
+<h2>How to get it ?</h2>
+
+<p>Grap it into the <a href="http://github.com/dwursteisen/imgur-API/downloads">download section</a></p>
+
+<h2>How to compile it ?</h2>
+
+<p>Create a property file into 'src/test/resources' directory named secret.properties with this bellowed content.
+This file is only used for the testing phase of packaging.</p>
+
+<pre><code>    flickr.apikey = YOUR_FLICKR_API_KEY
+    flickr.secret = YOUR_FLICKR_SECRET
+    imgur.apikey = YOUR_IMGUR_API_KEY
+    imgur.secret = YOUR_IMGUR_SECRET
+    imgur.anonymous.apikey = YOUR_IMGUR_ANONYMOUS_API_KEY
+</code></pre>
+
+<p>Compile it with maven</p>
+
+<pre><code>mvn install
+</code></pre>
+
+<p>the jar will be avaible into the target directory.</p>
+
+<h2>How to <em>just</em> compile it ?</h2>
+
+<p>Skip tests !</p>
+
+<pre><code>mvn install -Dmaven.test.skip=true
+</code></pre>
+
+<h2>Got an issue?</h2>
+
+<p>Just fill an <a href="https://github.com/dwursteisen/imgur-API/issues">issue</a> with your use case (service used, request, response received, response expected, ...)</p>
+
+<h2>Image api dependencies:</h2>
+
+<div class="highlight">
+<pre>    <span class="n">imgur</span><span class="o">-</span><span class="nl">api:</span><span class="n">imgur</span><span class="o">-</span><span class="nl">api:jar:</span><span class="mf">1.0</span><span class="o">-</span><span class="n">SNAPSHOT</span>
+    <span class="o">+-</span> <span class="n">com</span><span class="o">.</span><span class="na">google</span><span class="o">.</span><span class="na">code</span><span class="o">.</span><span class="na">gson</span><span class="o">:</span><span class="nl">gson:jar:</span><span class="mf">2.1</span><span class="o">:</span><span class="n">compile</span>
+    <span class="o">+-</span> <span class="n">org</span><span class="o">.</span><span class="na">scribe</span><span class="o">:</span><span class="nl">scribe:jar:</span><span class="mf">1.3</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="nl">SNAPSHOT:</span><span class="n">compile</span>
+    <span class="o">|</span>  <span class="err">\</span><span class="o">-</span> <span class="n">commons</span><span class="o">-</span><span class="nl">codec:</span><span class="n">commons</span><span class="o">-</span><span class="nl">codec:jar:</span><span class="mf">1.4</span><span class="o">:</span><span class="n">compile</span>
+    <span class="o">+-</span> <span class="nl">junit:junit:jar:</span><span class="mf">4.8</span><span class="o">.</span><span class="mi">2</span><span class="o">:</span><span class="n">compile</span>
+    <span class="o">+-</span> <span class="n">commons</span><span class="o">-</span><span class="nl">lang:</span><span class="n">commons</span><span class="o">-</span><span class="nl">lang:jar:</span><span class="mf">2.6</span><span class="o">:</span><span class="n">test</span>
+    <span class="o">+-</span> <span class="n">org</span><span class="o">.</span><span class="na">mockito</span><span class="o">:</span><span class="n">mockito</span><span class="o">-</span><span class="nl">all:jar:</span><span class="mf">1.9</span><span class="o">.</span><span class="mi">0</span><span class="o">:</span><span class="n">test</span>
+    <span class="o">+-</span> <span class="n">commons</span><span class="o">-</span><span class="nl">io:</span><span class="n">commons</span><span class="o">-</span><span class="nl">io:jar:</span><span class="mf">2.1</span><span class="o">:</span><span class="n">compile</span>
+    <span class="err">\</span><span class="o">-</span> <span class="nl">log4j:log4j:jar:</span><span class="mf">1.2</span><span class="o">.</span><span class="mi">16</span><span class="o">:</span><span class="n">compile</span>
+</pre>
+</div>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Image-api maintained by <a href="https://github.com/dwursteisen">dwursteisen</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30539685-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
