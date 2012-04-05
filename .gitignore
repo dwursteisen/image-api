@@ -3,4 +3,5 @@
 *.iml
 *.ipr
 /target
-.ideaflickr.token
+.idea
+flickr.token
