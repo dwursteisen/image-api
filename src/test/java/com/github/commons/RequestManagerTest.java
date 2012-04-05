@@ -21,6 +21,6 @@ public class RequestManagerTest {
 
     @Test(expected = IOException.class)
     public void can_return_null_with_wrong_response() throws IOException {
-        new RequestManager(generator).createObjectReponse("", AlbumResponse.class);
+        new RequestManager(generator).createObjectResponse("", AlbumResponse.class);
     }
 }

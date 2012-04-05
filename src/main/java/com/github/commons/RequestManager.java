@@ -40,18 +40,17 @@ public class RequestManager {
             throw new IOException("Oups ! Problem occur with your request " + request
                     + " ! The called webservice respond with " + responseBody);
         }
-        RESPONSE responseObject = createObjectReponse(responseBody, clazz);
+        String json = provider.validateResponse(responseBody);
+        RESPONSE responseObject = createObjectResponse(json, clazz);
         return responseObject;
 
     }
 
-    <RESPONSE extends Response> RESPONSE createObjectReponse(String responseBody, Class<RESPONSE> clazz) throws IOException {
-        String json = provider.validateResponse(responseBody);
+    public <RESPONSE extends Response> RESPONSE createObjectResponse(String json, Class<RESPONSE> clazz) throws IOException {
         RESPONSE responseObject = gson.fromJson(json, clazz);
         if (responseObject == null) {
-            throw new IOException("Oups ! Unable to desezialize response " + responseBody
+            throw new IOException("Oups ! Unable to desezialize response " + json
                     + " from your request. Check the validity of your request !");
-
         }
         responseObject.setRawResponse(json);
         return responseObject;
