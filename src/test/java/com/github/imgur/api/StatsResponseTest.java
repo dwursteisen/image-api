@@ -16,12 +16,11 @@
 
 package com.github.imgur.api;
 
+import com.github.commons.RequestManager;
 import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
 import com.github.imgur.api.stats.StatsRequest;
 import com.github.imgur.api.stats.StatsResponse;
-import com.google.gson.Gson;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -29,12 +28,11 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.fest.assertions.Assertions.assertThat;
 
 
 public class StatsResponseTest {
-    private Gson gson;
+
 
     final private String expectedResult =
             "{" +
@@ -49,6 +47,7 @@ public class StatsResponseTest {
 
 
     private static ImgUr imgur;
+    private RequestManager manager;
 
     @BeforeClass
     public static void setUpClass() {
@@ -57,28 +56,14 @@ public class StatsResponseTest {
 
     @Before
     public void setUp() throws Exception {
-        gson = new Gson();
+        manager = new RequestManager(null);
 
     }
 
     @Test
-    public void can_perform_serialization() {
-        StatsResponse stats = new StatsResponse();
-        stats.setMostPopularImages(new String[]{"gn2gN", "cXQqZ", "JiPqw", "WdRim", "zPxWo"});
-        stats.setImagesUploaded(1627648);
-        stats.setImagesViewed(1080303365);
-        stats.setBandwidthUsed("4.58 TB");
-        stats.setAverageImageSize("40.74 KB");
-        String result = gson.toJson(stats);
-
-        assertEquals(StringUtils.deleteWhitespace(expectedResult), StringUtils.deleteWhitespace(result));
-    }
-
-    @Test
-    public void can_perform_deserialization() {
-        StatsResponse stats = gson.fromJson(expectedResult, StatsResponse.class);
-        assertEquals("4.58 TB", stats.getBandwidthUsed());
-
+    public void can_perform_deserialization() throws IOException {
+        StatsResponse response = manager.createObjectResponse(expectedResult, StatsResponse.class);
+        assertThat(response.getBandwidthUsed()).isEqualTo("4.58 TB");
     }
 
 
@@ -86,6 +71,6 @@ public class StatsResponseTest {
     @Test
     public void can_call_imgur() throws IOException {
         StatsResponse response = imgur.call(new StatsRequest());
-        assertNotNull(response.getBandwidthUsed());
+        assertThat(response.getBandwidthUsed()).isNotNull();
     }
 }

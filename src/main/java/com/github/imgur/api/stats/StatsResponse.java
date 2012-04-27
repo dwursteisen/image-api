@@ -63,39 +63,20 @@ public class StatsResponse extends ImgUrResponse {
         return stats.averageImageSize;
     }
 
-    public void setAverageImageSize(String averageImageSize) {
-        this.stats.averageImageSize = averageImageSize;
-    }
-
     public String getBandwidthUsed() {
         return stats.bandwidthUsed;
-    }
-
-    public void setBandwidthUsed(String bandwidthUsed) {
-        this.stats.bandwidthUsed = bandwidthUsed;
     }
 
     public String[] getMostPopularImages() {
         return stats.mostPopularImages;
     }
 
-    public void setMostPopularImages(String[] mostPopularImages) {
-        this.stats.mostPopularImages = mostPopularImages;
-    }
-
     public int getImagesUploaded() {
         return stats.imagesUploaded;
-    }
-
-    public void setImagesUploaded(int imagesUploaded) {
-        this.stats.imagesUploaded = imagesUploaded;
     }
 
     public int getImagesViewed() {
         return stats.imagesViewed;
     }
 
-    public void setImagesViewed(int imagesViewed) {
-        this.stats.imagesViewed = imagesViewed;
-    }
 }

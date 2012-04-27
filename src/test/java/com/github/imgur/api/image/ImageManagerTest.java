@@ -1,15 +1,15 @@
 package com.github.imgur.api.image;
 
+import com.github.commons.RequestManager;
 import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
-import com.google.gson.Gson;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -47,20 +47,23 @@ public class ImageManagerTest {
                     "}" +
                     "}\n";
 
+    private RequestManager manager;
+
+    @Before
+    public void setUp() {
+        manager = new RequestManager(null);
+    }
 
     @Test
-    public void can_deserialize_imgur_response() {
-        ImageResponse response = new Gson().fromJson(imgUrResponse, ImageResponse.class);
-        assertEquals(408360, response.getImage().getViews());
+    public void can_deserialize_imgur_response() throws IOException {
+        ImageResponse response = manager.createObjectResponse(imgUrResponse, ImageResponse.class);
+        assertThat(response.getImage().getViews()).isEqualTo(408360);
     }
 
     @Test
     public void can_call_imgur() throws IOException {
-        final String hash = "ABktn";
-        ImageResponse result = imgur.call(new ImageRequest(hash));
-
-        assertNotNull(result.getImage());
-        assertEquals("2010-08-31 12:10:40", result.getImage().getDatetime());
+        ImageResponse result = imgur.call(new ImageRequest("ABktn"));
+        assertThat(result.getImage().getDatetime()).isEqualTo("2010-08-31 12:10:40");
     }
 
     @Test(expected = IOException.class)
@@ -68,6 +71,5 @@ public class ImageManagerTest {
         final String hash = "FAKE";
         imgur.call(new ImageRequest(hash));
     }
-
 
 }

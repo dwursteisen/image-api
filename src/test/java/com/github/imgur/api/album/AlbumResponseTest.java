@@ -1,15 +1,15 @@
 package com.github.imgur.api.album;
 
+import com.github.commons.RequestManager;
 import com.github.imgur.ImgUr;
 import com.github.imgur.ImgUrBuilder;
-import com.google.gson.Gson;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class AlbumResponseTest {
     private static ImgUr imgur;
-    private static final Gson gson = new Gson();
 
     private static final String response = "{\n" +
             "        \"album\": {\n" +
@@ -52,20 +51,27 @@ public class AlbumResponseTest {
             "    }\n" +
             "    }";
 
+    private RequestManager manager;
+
     @BeforeClass
     public static void setUpClass() {
         imgur = new ImgUrBuilder().withApiKey().build();
     }
 
+    @Before
+    public void setUp() {
+        manager = new RequestManager(null);
+    }
+
     @Test
-    public void can_deserialize_response() {
-        AlbumResponse albumResponse = gson.fromJson(response, AlbumResponse.class);
-        assertEquals(1, albumResponse.getImages().size());
+    public void can_deserialize_response() throws IOException {
+        AlbumResponse albumResponse = manager.createObjectResponse(response, AlbumResponse.class);
+        assertThat(albumResponse.getImages().size()).isEqualTo(1);
     }
 
     @Test
     public void can_call_imgur() throws IOException {
         AlbumResponse albumResponse = imgur.call(new AlbumRequest("27nLQ"));
-        assertTrue(albumResponse.getImages().size() > 5); // today, there is more than 5 pics into this album
+        assertThat(albumResponse.getImages().size()).isGreaterThan(5); // today, there is more than 5 pics into this album
     }
 }

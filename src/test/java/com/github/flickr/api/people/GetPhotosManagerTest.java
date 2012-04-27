@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -27,7 +27,7 @@ public class GetPhotosManagerTest {
     public void can_call_flickr() throws IOException {
         GetPhotosRequest request = new GetPhotosRequest(FlickrBuilder.getAccessToken());
         GetPhotosResponse response = flickr.call(request);
-        assertEquals("ok", response.getStat());
+        assertThat(response.getStat()).matches("ok");
 
     }
 }

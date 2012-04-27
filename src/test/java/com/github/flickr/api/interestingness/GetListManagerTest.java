@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -27,11 +27,10 @@ public class GetListManagerTest {
 
     @Test
     public void can_call_flickr() throws IOException {
-        GetListRequest request = new GetListRequest();
-        GetListResponse response = flickr.call(request);
-        assertEquals("ok", response.getStat());
-        assertEquals(1, response.getPage());
-        assertEquals(response.getPerPage(), response.getPhotos().size());
+        GetListResponse response = flickr.call(new GetListRequest());
+        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getPage()).isEqualTo(1);
+        assertThat(response.getPerPage()).isEqualTo(response.getPhotos().size());
     }
 
     @Test
@@ -39,8 +38,9 @@ public class GetListManagerTest {
         GetListRequest request = new GetListRequest();
         request.setPage(5);
         GetListResponse response = flickr.call(request);
-        assertEquals("ok", response.getStat());
-        assertEquals(5, response.getPage());
+        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getPage()).isEqualTo(5);
+
     }
 
     @Test

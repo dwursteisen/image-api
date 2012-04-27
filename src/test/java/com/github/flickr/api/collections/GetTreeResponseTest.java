@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -41,6 +41,6 @@ public class GetTreeResponseTest {
     @Test
     public void can_deserialize() throws IOException {
         GetTreeResponse response = manager.createObjectResponse(this.response, GetTreeResponse.class);
-        assertEquals("ok", response.getStat());
+        assertThat(response.getStat()).matches("ok");
     }
 }

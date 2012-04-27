@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -49,6 +49,6 @@ public class AlbumsResponseTest {
     @Test
     public void can_deserialize() throws IOException {
         AlbumsResponse response = manager.createObjectResponse(json, AlbumsResponse.class);
-        assertEquals("Cover Photos", response.getData().get(0).getName());
+        assertThat(response.getData().get(0).getName()).matches("Cover Photos");
     }
 }
