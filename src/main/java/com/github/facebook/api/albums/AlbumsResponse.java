@@ -1,6 +1,10 @@
 package com.github.facebook.api.albums;
 
 import com.github.facebook.api.commons.FacebookResponse;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Wursteisen David
@@ -35,6 +39,49 @@ public class AlbumsResponse extends FacebookResponse {
        }
     }
      */
+    public static class Data {
+        private String id;
+        private String name;
+        private String link;
+        private String privacy; // enum ?
+        private int count;
+        private String type;
 
+        @SerializedName("can_upload")
+        private boolean canUpload;
 
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getPrivacy() {
+            return privacy;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public boolean canUpload() {
+            return canUpload;
+        }
+    }
+
+    private List<Data> data = new ArrayList<Data>();
+
+    public List<Data> getData() {
+        return data;
+    }
 }
