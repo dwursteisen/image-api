@@ -76,4 +76,8 @@ public class Flickr extends OAuthSupport {
     public GetTreeResponse call(GetTreeRequest request) throws IOException {
         return requestManager.call(request, GetTreeResponse.class);
     }
+
+    public com.github.flickr.api.collections.GetInfoResponse call(com.github.flickr.api.collections.GetInfoRequest request) throws IOException {
+        return requestManager.call(request, com.github.flickr.api.collections.GetInfoResponse.class);
+    }
 }
