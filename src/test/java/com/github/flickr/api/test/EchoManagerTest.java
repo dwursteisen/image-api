@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class EchoManagerTest {
 
@@ -22,8 +21,7 @@ public class EchoManagerTest {
     @Test
     public void can_call_flickr() throws IOException {
         EchoResponse response = flickr.call(new EchoRequest());
-        assertNotNull(response);
-        assertEquals("ok", response.getStat());
+        assertThat(response.getStat()).matches("ok");
     }
 
     @Test
@@ -31,6 +29,6 @@ public class EchoManagerTest {
         EchoRequest request = new EchoRequest();
         request.setTestParameter("MyFakeParameter");
         EchoResponse response = flickr.call(request);
-        assertEquals("MyFakeParameter", response.getTestParameter());
+        assertThat(response.getTestParameter()).matches("MyFakeParameter");
     }
 }

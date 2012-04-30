@@ -3,7 +3,7 @@ package com.github.flickr;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -23,6 +23,6 @@ public class FlickrRequestGeneratorTest {
     @Test
     public void can_validate_response() {
         String json = generator.validateResponse("jsonFlickrApi({})");
-        assertEquals("{}", json);
+        assertThat(json).isEqualTo("{}");
     }
 }

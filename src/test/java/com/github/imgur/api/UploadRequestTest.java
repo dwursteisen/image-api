@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.fest.assertions.Assertions.assertThat;
 
 
 public class UploadRequestTest {
@@ -45,7 +45,7 @@ public class UploadRequestTest {
     public void can_build_with_title() throws IOException {
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withTitle("title").build();
-        assertEquals("title", request.buildParameters().get("title"));
+        assertThat(request.buildParameters().get("title")).isEqualTo("title");
     }
 
     @Test
@@ -55,8 +55,8 @@ public class UploadRequestTest {
         UploadRequest.Builder builder = new UploadRequest.Builder();
         UploadRequest request = builder.withTitle("title").withImageUrl(imageUrl).build();
         Map<String, Object> params = request.buildParameters();
-        assertEquals("http://github.com/images/modules/header/logov3-hover.png", params.get("image").toString());
-        assertEquals("title", params.get("title"));
+        assertThat(params.get("image").toString()).isEqualTo("http://github.com/images/modules/header/logov3-hover.png");
+        assertThat(params.get("title")).isEqualTo("title");
 
     }
 
@@ -69,9 +69,7 @@ public class UploadRequestTest {
 
         UploadRequest request = builder.withImageFile(image).build();
         String imageData = (String) request.buildParameters().get("image");
-        assertNotNull(imageData);
-        assertFalse(imageData.startsWith("http://"));
-
+        assertThat(imageData).doesNotContain("http://");
     }
 
 
@@ -85,10 +83,7 @@ public class UploadRequestTest {
 
         UploadRequest request = builder.withImageData(array).build();
         String imageData = (String) request.buildParameters().get("image");
-        assertNotNull(imageData);
-        assertFalse(imageData.startsWith("http://"));
-
-
+        assertThat(imageData).doesNotContain("http://");
     }
 
     @Test
@@ -99,8 +94,8 @@ public class UploadRequestTest {
         UploadRequest request = builder.withImageUrl(imageUrl).build();
 
         Map<String, Object> parameters = request.buildParameters();
-        assertFalse(parameters.keySet().contains("title"));
-        assertEquals("http://github.com/images/modules/header/logov3-hover.png", parameters.get("image").toString());
+        assertThat("title").isNotIn(parameters.keySet());
+        assertThat("http://github.com/images/modules/header/logov3-hover.png").isEqualTo(parameters.get("image").toString());
     }
 
     @Test
@@ -111,7 +106,7 @@ public class UploadRequestTest {
         UploadRequest request = builder.withImageUrl(imageUrl).build();
 
         UploadResponse response = imgur.call(request);
-        assertNotNull(response.getLinks());
+        assertThat(response.getLinks()).isNotNull();
     }
 
 
@@ -122,7 +117,7 @@ public class UploadRequestTest {
 
         UploadRequest request = builder.withImageFile(image).build();
         UploadResponse response = imgur.call(request);
-        assertNotNull(response.getLinks());
+        assertThat(response.getLinks()).isNotNull();
 
         System.err.println("...just upload an image that you will find on the url : ");
         System.err.println("URL : " + response.getLinks().getImgurPage());

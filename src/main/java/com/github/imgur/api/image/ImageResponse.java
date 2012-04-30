@@ -25,14 +25,14 @@ import com.github.imgur.api.model.Links;
 public class ImageResponse extends ImgUrResponse {
 
 
-    private ImageProperty images = new ImageProperty();
+    private ImageProperty image = new ImageProperty();
 
     public Links getLinks() {
-        return images.getLinks();
+        return image.getLinks();
     }
 
     public Image getImage() {
-        return images.getImage();
+        return image.getImage();
     }
 
 }
