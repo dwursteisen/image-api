@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class EchoManagerTest {
+public class EchoManagerFunctionalTest {
 
     private Flickr flickr;
 

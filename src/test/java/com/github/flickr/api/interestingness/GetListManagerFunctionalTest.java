@@ -16,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
  * Date: 18/02/12
  * Time: 14:32
  */
-public class GetListManagerTest {
+public class GetListManagerFunctionalTest {
 
     private Flickr flickr;
 

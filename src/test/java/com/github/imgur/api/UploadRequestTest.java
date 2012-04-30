@@ -16,12 +16,8 @@
 
 package com.github.imgur.api;
 
-import com.github.imgur.ImgUr;
-import com.github.imgur.ImgUrBuilder;
 import com.github.imgur.api.upload.UploadRequest;
-import com.github.imgur.api.upload.UploadResponse;
 import org.apache.commons.io.FileUtils;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -33,13 +29,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 
 public class UploadRequestTest {
-
-    private static ImgUr imgur;
-
-    @BeforeClass
-    public static void setUpClass() {
-        imgur = new ImgUrBuilder().withAnonymousKey().build();
-    }
 
     @Test
     public void can_build_with_title() throws IOException {
@@ -98,31 +87,5 @@ public class UploadRequestTest {
         assertThat("http://github.com/images/modules/header/logov3-hover.png").isEqualTo(parameters.get("image").toString());
     }
 
-    @Test
-    public void can_upload_url_image() throws IOException {
-        URL imageUrl = new URL("http://i.imgur.com/jxGar.jpg");
-
-        UploadRequest.Builder builder = new UploadRequest.Builder();
-        UploadRequest request = builder.withImageUrl(imageUrl).build();
-
-        UploadResponse response = imgur.call(request);
-        assertThat(response.getLinks()).isNotNull();
-    }
-
-
-    @Test
-    public void can_upload_image_file() throws IOException {
-        final File image = new File("./src/test/resources/uploadme.jpg");
-        UploadRequest.Builder builder = new UploadRequest.Builder();
-
-        UploadRequest request = builder.withImageFile(image).build();
-        UploadResponse response = imgur.call(request);
-        assertThat(response.getLinks()).isNotNull();
-
-        System.err.println("...just upload an image that you will find on the url : ");
-        System.err.println("URL : " + response.getLinks().getImgurPage());
-        System.err.println("DELETE URL : " + response.getLinks().getDeletePage());
-
-    }
 
 }

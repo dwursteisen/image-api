@@ -14,7 +14,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * Date: 26/02/12
  * Time: 16:11
  */
-public class GetPhotosManagerTest {
+public class GetPhotosManagerFunctionalTest {
 
     private static Flickr flickr;
 
