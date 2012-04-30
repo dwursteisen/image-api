@@ -127,6 +127,13 @@
                     <target>1.6</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.plexus</groupId>
+                        <artifactId>plexus-compiler-javac</artifactId>
+                        <version>1.8.6</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
