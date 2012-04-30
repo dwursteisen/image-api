@@ -17,13 +17,8 @@
 package com.github.imgur.api;
 
 import com.github.commons.RequestManager;
-import com.github.imgur.ImgUr;
-import com.github.imgur.ImgUrBuilder;
-import com.github.imgur.api.stats.StatsRequest;
 import com.github.imgur.api.stats.StatsResponse;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -46,13 +41,7 @@ public class StatsResponseTest {
                     "}";
 
 
-    private static ImgUr imgur;
     private RequestManager manager;
-
-    @BeforeClass
-    public static void setUpClass() {
-        imgur = new ImgUrBuilder().withApiKey().build();
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -66,11 +55,4 @@ public class StatsResponseTest {
         assertThat(response.getBandwidthUsed()).isEqualTo("4.58 TB");
     }
 
-
-    @Ignore("stats request no more working on imgur...")
-    @Test
-    public void can_call_imgur() throws IOException {
-        StatsResponse response = imgur.call(new StatsRequest());
-        assertThat(response.getBandwidthUsed()).isNotNull();
-    }
 }
