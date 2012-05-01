@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 public class UploadRequestFunctionalTest {

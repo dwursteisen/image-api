@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.scribe.model.OAuthRequest;
 import org.scribe.oauth.OAuthService;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
  * User: Wursteisen David

@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 public class UploadRequestTest {
