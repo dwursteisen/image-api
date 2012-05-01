@@ -21,7 +21,7 @@ public class EchoManagerFunctionalTest {
     @Test
     public void can_call_flickr() throws IOException {
         EchoResponse response = flickr.call(new EchoRequest());
-        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getStat()).isEqualTo("ok");
     }
 
     @Test
@@ -29,6 +29,6 @@ public class EchoManagerFunctionalTest {
         EchoRequest request = new EchoRequest();
         request.setTestParameter("MyFakeParameter");
         EchoResponse response = flickr.call(request);
-        assertThat(response.getTestParameter()).matches("MyFakeParameter");
+        assertThat(response.getTestParameter()).isEqualTo("MyFakeParameter");
     }
 }

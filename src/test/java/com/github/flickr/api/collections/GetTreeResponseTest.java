@@ -41,6 +41,6 @@ public class GetTreeResponseTest {
     @Test
     public void can_deserialize() throws IOException {
         GetTreeResponse response = manager.createObjectResponse(this.response, GetTreeResponse.class);
-        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getStat()).isEqualTo("ok");
     }
 }

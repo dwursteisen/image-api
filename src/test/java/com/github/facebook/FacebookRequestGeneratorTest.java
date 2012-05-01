@@ -28,7 +28,7 @@ public class FacebookRequestGeneratorTest {
     @Test
     public void can_create_http_request_with_me_as_user_id() {
         OAuthRequest request = generator.createHttpRequest(new AlbumsRequest());
-        assertThat(request.getCompleteUrl()).matches("https://graph.facebook.com/me/albums");
+        assertThat(request.getCompleteUrl()).isEqualTo("https://graph.facebook.com/me/albums");
     }
 
     @Test
@@ -36,6 +36,6 @@ public class FacebookRequestGeneratorTest {
         AlbumsRequest facebookRequest = new AlbumsRequest();
         facebookRequest.setUserId("azerty");
         OAuthRequest request = generator.createHttpRequest(facebookRequest);
-        assertThat(request.getCompleteUrl()).matches("https://graph.facebook.com/azerty/albums");
+        assertThat(request.getCompleteUrl()).isEqualTo("https://graph.facebook.com/azerty/albums");
     }
 }

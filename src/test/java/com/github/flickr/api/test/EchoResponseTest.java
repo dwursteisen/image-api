@@ -23,6 +23,6 @@ public class EchoResponseTest {
     @Test
     public void can_parse_response() throws IOException {
         EchoResponse response = manager.createObjectResponse(json, EchoResponse.class);
-        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getStat()).isEqualTo("ok");
     }
 }

@@ -27,7 +27,7 @@ public class GetPhotosManagerFunctionalTest {
     public void can_call_flickr() throws IOException {
         GetPhotosRequest request = new GetPhotosRequest(FlickrBuilder.getAccessToken());
         GetPhotosResponse response = flickr.call(request);
-        assertThat(response.getStat()).matches("ok");
+        assertThat(response.getStat()).isEqualTo("ok");
 
     }
 }

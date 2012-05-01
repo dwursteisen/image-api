@@ -57,7 +57,7 @@ public class AlbumResponseTest {
     @Test
     public void can_deserialize_response() throws IOException {
         AlbumResponse albumResponse = manager.createObjectResponse(response, AlbumResponse.class);
-        assertThat(albumResponse.getImages().size()).isEqualTo(1);
+        assertThat(albumResponse.getImages()).hasSize(1);
     }
 
 }

@@ -49,6 +49,6 @@ public class AlbumsResponseTest {
     @Test
     public void can_deserialize() throws IOException {
         AlbumsResponse response = manager.createObjectResponse(json, AlbumsResponse.class);
-        assertThat(response.getData().get(0).getName()).matches("Cover Photos");
+        assertThat(response.getData().get(0).getName()).isEqualTo("Cover Photos");
     }
 }

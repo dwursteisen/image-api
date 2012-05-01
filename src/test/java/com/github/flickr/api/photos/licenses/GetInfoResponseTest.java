@@ -3,7 +3,7 @@ package com.github.flickr.api.photos.licenses;
 import com.google.gson.Gson;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 /**
  * User: Wursteisen David
@@ -30,7 +30,7 @@ public class GetInfoResponseTest {
     @Test
     public void can_deserialize() {
         GetInfoResponse response = gson.fromJson(json, GetInfoResponse.class);
-        assertEquals(9, response.getLicenses().size());
+        assertThat(response.getLicenses()).hasSize(9);
     }
 
 

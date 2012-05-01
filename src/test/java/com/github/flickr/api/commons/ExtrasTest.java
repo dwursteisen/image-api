@@ -20,6 +20,6 @@ public class ExtrasTest {
     @Test
     public void can_generate_comma_delimited_extras_with_collection() throws Exception {
         List<Extras> extrasList = Arrays.asList(Extras.UrlSmallSquare, Extras.OwnerName);
-        assertThat(commaDelimited(extrasList)).matches("url_sq,owner_name");
+        assertThat(commaDelimited(extrasList)).isEqualTo("url_sq,owner_name");
     }
 }
