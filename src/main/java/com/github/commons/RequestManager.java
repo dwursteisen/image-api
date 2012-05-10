@@ -24,9 +24,9 @@ import java.io.IOException;
 public class RequestManager {
 
     private final Gson gson = new Gson();
-    private final ProviderRequestGenerator provider;
+    private final RequestProvider provider;
 
-    public RequestManager(ProviderRequestGenerator provider) {
+    public RequestManager(RequestProvider provider) {
         this.provider = provider;
     }
 
@@ -40,7 +40,7 @@ public class RequestManager {
             throw new IOException("Oups ! Problem occur with your request " + request
                     + " ! The called webservice respond with " + responseBody);
         }
-        String json = provider.validateResponse(responseBody);
+        String json = provider.jsonUpdater(responseBody);
         RESPONSE responseObject = createObjectResponse(json, clazz);
         return responseObject;
 

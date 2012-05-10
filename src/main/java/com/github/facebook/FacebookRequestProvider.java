@@ -1,7 +1,7 @@
 package com.github.facebook;
 
-import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.Request;
+import com.github.commons.RequestProvider;
 import com.github.facebook.api.commons.FacebookRequest;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Token;
@@ -13,14 +13,14 @@ import org.scribe.oauth.OAuthService;
  * Date: 22/04/12
  * Time: 18:34
  */
-public class FacebookRequestGenerator implements ProviderRequestGenerator {
+public class FacebookRequestProvider implements RequestProvider {
 
 
     private static final String FACEBOOK_BASE_URL = "https://graph.facebook.com/%s";
 
     private OAuthService oauth;
 
-    public FacebookRequestGenerator(OAuthService oauth) {
+    public FacebookRequestProvider(OAuthService oauth) {
         this.oauth = oauth;
     }
 
@@ -39,7 +39,7 @@ public class FacebookRequestGenerator implements ProviderRequestGenerator {
     }
 
     @Override
-    public String validateResponse(String response) {
+    public String jsonUpdater(String response) {
         return response;
     }
 

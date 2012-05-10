@@ -13,16 +13,16 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class FlickrRequestGeneratorTest {
 
 
-    private FlickrRequestGenerator generator;
+    private FlickrRequestProvider generator;
 
     @Before
     public void setUp() {
-        generator = new FlickrRequestGenerator("api");
+        generator = new FlickrRequestProvider("api");
     }
 
     @Test
     public void can_validate_response() {
-        String json = generator.validateResponse("jsonFlickrApi({})");
+        String json = generator.jsonUpdater("jsonFlickrApi({})");
         assertThat(json).isEqualTo("{}");
     }
 }

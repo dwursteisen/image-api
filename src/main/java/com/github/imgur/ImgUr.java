@@ -24,7 +24,7 @@ import java.io.IOException;
  * Time: 21:11
  */
 public class ImgUr extends OAuthSupport {
-    private final ImgUrRequestGenerator requestGenerator;
+    private final ImgUrRequestProvider requestGenerator;
     private final RequestManager requestManager;
 
 
@@ -34,7 +34,7 @@ public class ImgUr extends OAuthSupport {
 
     public ImgUr(String apiKey, OAuthService oauth) {
         super(oauth);
-        requestGenerator = new ImgUrRequestGenerator(apiKey, oauth);
+        requestGenerator = new ImgUrRequestProvider(apiKey, oauth);
         requestManager = new RequestManager(requestGenerator);
     }
 

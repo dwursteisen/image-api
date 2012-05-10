@@ -23,7 +23,7 @@ public class FacebookRequestGeneratorTest {
     private OAuthService oauth;
 
     @InjectMocks
-    private FacebookRequestGenerator generator;
+    private FacebookRequestProvider generator;
 
     @Test
     public void can_create_http_request_with_me_as_user_id() {

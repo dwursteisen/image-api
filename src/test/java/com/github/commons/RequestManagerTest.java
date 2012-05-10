@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RequestManagerTest {
 
     @Mock
-    ProviderRequestGenerator generator;
+    RequestProvider generator;
 
     @Test(expected = IOException.class)
     public void can_return_null_with_wrong_response() throws IOException {

@@ -1,7 +1,7 @@
 package com.github.imgur;
 
-import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.Request;
+import com.github.commons.RequestProvider;
 import com.github.imgur.api.commons.ImgUrRequest;
 import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
@@ -11,20 +11,20 @@ import org.scribe.oauth.OAuthService;
 
 import java.util.Map;
 
-public class ImgUrRequestGenerator implements ProviderRequestGenerator {
+public class ImgUrRequestProvider implements RequestProvider {
 
-    private final static Logger LOG = Logger.getLogger(ImgUrRequestGenerator.class);
+    private final static Logger LOG = Logger.getLogger(ImgUrRequestProvider.class);
 
     private static final String IMGUR_BASE_URL = "http://api.imgur.com/2/";
 
     private final String apiKey;
     private final OAuthService oauth;
 
-    public ImgUrRequestGenerator(String apiKey) {
+    public ImgUrRequestProvider(String apiKey) {
         this(apiKey, null);
     }
 
-    public ImgUrRequestGenerator(String apiKey, OAuthService oauth) {
+    public ImgUrRequestProvider(String apiKey, OAuthService oauth) {
         this.apiKey = apiKey;
         this.oauth = oauth;
     }
@@ -59,7 +59,7 @@ public class ImgUrRequestGenerator implements ProviderRequestGenerator {
     }
 
     @Override
-    public String validateResponse(String response) {
+    public String jsonUpdater(String response) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("JSon received from imgur : " + response);
         }

@@ -1,8 +1,8 @@
 package com.github.facebook;
 
 import com.github.commons.OAuthSupport;
-import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.RequestManager;
+import com.github.commons.RequestProvider;
 import com.github.facebook.api.albums.AlbumsRequest;
 import com.github.facebook.api.albums.AlbumsResponse;
 import org.scribe.builder.ServiceBuilder;
@@ -24,7 +24,7 @@ public class Facebook extends OAuthSupport {
                 .callback(callbackUrl)
                 .apiKey(apiKey)
                 .apiSecret(secret).build());
-        ProviderRequestGenerator provider = new FacebookRequestGenerator(oauth);
+        RequestProvider provider = new FacebookRequestProvider(oauth);
         requestManager = new RequestManager(provider);
     }
 

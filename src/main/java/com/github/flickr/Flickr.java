@@ -1,8 +1,8 @@
 package com.github.flickr;
 
 import com.github.commons.OAuthSupport;
-import com.github.commons.ProviderRequestGenerator;
 import com.github.commons.RequestManager;
+import com.github.commons.RequestProvider;
 import com.github.flickr.api.collections.GetTreeRequest;
 import com.github.flickr.api.collections.GetTreeResponse;
 import com.github.flickr.api.interestingness.GetListRequest;
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class Flickr extends OAuthSupport {
 
 
-    private final ProviderRequestGenerator generator;
+    private final RequestProvider generator;
     private final RequestManager requestManager;
 
     public Flickr(final String apiKey, final String secret, final String callback) {
@@ -37,7 +37,7 @@ public class Flickr extends OAuthSupport {
 
     public Flickr(final String apiKey, final OAuthService oauthService) {
         super(oauthService);
-        this.generator = new FlickrRequestGenerator(apiKey, oauth);
+        this.generator = new FlickrRequestProvider(apiKey, oauth);
         requestManager = new RequestManager(generator);
     }
 
