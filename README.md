@@ -3,16 +3,17 @@ Image Api
 
 What is the main purpose of this library ?
 ------------
-Image API is here to provide an easy access to image web service like imgur, flickr, etc.
+Image API is here to provide an easy access to image web service like imgur, flickr, facebook, etc.
 You'll be able to get data from webservice, as you'll be able to push data like your last picture, ...
 
 What image web service is now supported ?
 -----
-Today, you can make request for: [imgur](http://api.imgur.com/) and [flickr](http://www.flickr.com/services/api/)
+Today, you can make request for: [imgur](http://api.imgur.com/), [flickr](http://www.flickr.com/services/api/) and
+[facebook](https://developers.facebook.com/)
 
 How to use it ?
 ---------------
-Add Image API into your classpath, then simply create the service object of your need (img ur, flickr, ...)
+Add Image API into your classpath, then simply create the service object of your need (imgur, flickr, facebook, ...)
 as the example just bellow
 
 ### With Flickr
@@ -65,44 +66,25 @@ You haven't need to create any OAuthService as seen in [scribe](https://github.c
 
 How to get it ?
 ---------------
-Grap it into the [download section](http://github.com/dwursteisen/imgur-API/downloads)
+If you use maven (or other dependency management like ivy/graddle/sbt), just add image-api as a dependency
 
-How to compile it ?
--------------------
-Create a property file into 'src/test/resources' directory named secret.properties with this bellowed content.
-This file is only used for the testing phase of packaging.
+            <dependency>
+                <groupId>com.github.dwursteisen</groupId>
+                <artifactId>image-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
-    flickr.apikey = YOUR_FLICKR_API_KEY
-    flickr.secret = YOUR_FLICKR_SECRET
-    imgur.apikey = YOUR_IMGUR_API_KEY
-    imgur.secret = YOUR_IMGUR_SECRET
-    imgur.anonymous.apikey = YOUR_IMGUR_ANONYMOUS_API_KEY
+Because it's currently hosted on sonatype oss repository, please add this snapshot repository into your maven project :
 
- Compile it with maven
+        <repositories>
+            <repository>
+                <id>sonatype-snapshot</id>
+                <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            </repository>
+        </repositories>
 
-    mvn install
 
-the jar will be avaible into the target directory.
-
-How to *just* compile it ?
---------------------------
-Skip tests !
-
-    mvn install -Dmaven.test.skip=true
 
 Got an issue?
 --------------
 Just fill an [issue](https://github.com/dwursteisen/imgur-API/issues) with your use case (service used, request, response received, response expected, ...)
-
-Image api dependencies:
-----
-
-    imgur-api:imgur-api:jar:1.0-SNAPSHOT
-    +- com.google.code.gson:gson:jar:2.1:compile
-    +- org.scribe:scribe:jar:1.3.1-SNAPSHOT:compile
-    |  \- commons-codec:commons-codec:jar:1.4:compile
-    +- junit:junit:jar:4.8.2:compile
-    +- commons-lang:commons-lang:jar:2.6:test
-    +- org.mockito:mockito-all:jar:1.9.0:test
-    +- commons-io:commons-io:jar:2.1:compile
-    \- log4j:log4j:jar:1.2.16:compile
