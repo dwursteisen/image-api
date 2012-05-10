@@ -24,13 +24,6 @@
     <artifactId>image-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <repositories>
-        <repository>
-            <id>google-code</id>
-            <url>http://google-gson.googlecode.com/svn/mavenrepo/</url>
-        </repository>
-    </repositories>
-
     <properties>
         <test.to.exclude>**/*FunctionalTest.java</test.to.exclude>
     </properties>
