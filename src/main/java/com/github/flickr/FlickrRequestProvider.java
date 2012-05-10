@@ -3,7 +3,6 @@ package com.github.flickr;
 import com.github.commons.Request;
 import com.github.commons.RequestProvider;
 import com.github.flickr.api.commons.FlickrRequest;
-import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
@@ -12,9 +11,6 @@ import org.scribe.oauth.OAuthService;
 import java.util.Map;
 
 public class FlickrRequestProvider implements RequestProvider {
-
-
-    private final static Logger LOG = Logger.getLogger(FlickrRequestProvider.class);
 
     private static final String FLICKR_BASE_URL = "http://api.flickr.com/services/rest/";
 
@@ -50,9 +46,6 @@ public class FlickrRequestProvider implements RequestProvider {
     @Override
     public String jsonUpdater(String response) {
         String json = response.substring(0, response.length() - 1).replace("jsonFlickrApi(", "");
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("JSon received from flickr : " + json);
-        }
         return json;
     }
 

@@ -3,7 +3,6 @@ package com.github.imgur;
 import com.github.commons.Request;
 import com.github.commons.RequestProvider;
 import com.github.imgur.api.commons.ImgUrRequest;
-import org.apache.log4j.Logger;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
@@ -12,8 +11,6 @@ import org.scribe.oauth.OAuthService;
 import java.util.Map;
 
 public class ImgUrRequestProvider implements RequestProvider {
-
-    private final static Logger LOG = Logger.getLogger(ImgUrRequestProvider.class);
 
     private static final String IMGUR_BASE_URL = "http://api.imgur.com/2/";
 
@@ -60,9 +57,6 @@ public class ImgUrRequestProvider implements RequestProvider {
 
     @Override
     public String jsonUpdater(String response) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("JSon received from imgur : " + response);
-        }
         return response;
     }
 
