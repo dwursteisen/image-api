@@ -1,4 +1,4 @@
-Image Api
+Image Api [![Build Status](https://buildhive.cloudbees.com/job/dwursteisen/job/image-api/badge/icon)](https://buildhive.cloudbees.com/job/dwursteisen/job/image-api/)
 =========
 
 What is the main purpose of this library ?
