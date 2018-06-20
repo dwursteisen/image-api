@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ImgUrRequestProvider implements RequestProvider {
 
-    private static final String IMGUR_BASE_URL = "http://api.imgur.com/2/";
+    private static final String IMGUR_BASE_URL = "http://api.imgur.com/3/";
 
     private final String apiKey;
     private final OAuthService oauth;
